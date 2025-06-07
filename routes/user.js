@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const { 
-    check_new_user_detail_entry, 
+    check_new_user_detail_entry_signup, 
     hash_password,
 } = require("../middleware/user");
 
 const {
-
+    check_user_detail_entry_login,
+    check_password_and_add_user_info,
 } = require("../middleware/authenticate")
 
 const {
@@ -18,7 +19,7 @@ const {
 } = require("../controllers/user");
 
 const {
-    handle_post_login_existing_user,
+    handle_login_assign_jwt,
 } = require("../controllers/authenticate");
 
 router
@@ -32,10 +33,10 @@ router
 
 router
     .route("/signup")
-    .post(check_new_user_detail_entry,hash_password,handle_post_create_new_user)
+    .post(check_new_user_detail_entry_signup,hash_password,handle_post_create_new_user)
 
 router
     .route("/login")
-    .post(handle_post_login_existing_user);
+    .post(check_user_detail_entry_login,check_password_and_add_user_info,handle_login_assign_jwt);
 
 module.exports = router;

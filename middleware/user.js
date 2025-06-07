@@ -2,7 +2,7 @@ const salt_round = 10;
 const bcrypt  = require("bcrypt");
 const {db} = require("../models/foodopiaDB");
 
-async function check_new_user_detail_entry(req, res, next){
+async function check_new_user_detail_entry_signup(req, res, next){
     const { user_name, name, role, password } = req.body;
 
     if(!user_name || !name || !role || !password){
@@ -36,6 +36,6 @@ async function hash_password (req, res, next){
 }
 
 module.exports = {
-    check_new_user_detail_entry,
+    check_new_user_detail_entry_signup,
     hash_password
 }
