@@ -4,7 +4,7 @@ const router = express.Router();
 const { 
     check_new_user_detail_entry_signup, 
     hash_password,
-} = require("../middleware/user");
+} = require("../middleware/api_user");
 
 const {
     check_user_detail_entry_login,
@@ -21,7 +21,7 @@ const {
     handle_get_user_by_id,
     handle_delete_user_by_id,
     handle_post_create_new_user,
-} = require("../controllers/user");
+} = require("../controllers/api_user");
 
 const {
     handle_login_assign_jwt,
@@ -40,10 +40,11 @@ router.use(auth_check_if_logged_in);
 router
     .route("/")
     .get(auth_restrict_to(["admin"]),handle_get_all_users)
-
+    
 router  
     .route("/:id")
     .get(handle_get_user_by_id)
     .delete(handle_delete_user_by_id)
+
 
 module.exports = router;

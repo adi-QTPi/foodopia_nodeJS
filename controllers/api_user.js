@@ -46,12 +46,11 @@ async function handle_post_create_new_user(req,res){
         }
         return res.status(200).json({"msg":"new user created"});
     })
-
 }
 
 module.exports ={
     handle_get_all_users,
     handle_get_user_by_id,
     handle_delete_user_by_id,
-    handle_post_create_new_user
+    handle_post_create_new_user,
 }
