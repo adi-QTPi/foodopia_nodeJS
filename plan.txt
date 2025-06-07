@@ -1,12 +1,16 @@
 /user
-    / (admin)
-        get -> show all users
+    / (admin) 
+        get -> show all users (json response done)
     /:id (admin)
-        get -> show a particular user
-        delete -> delete a particular user
+        get -> show a particular user (json response done)
+        delete -> delete a particular user (DONE)
+    /profile (all)
+        get -> show current user profile
+        patch -> edit current user profile
+        delete -> delete account by the current user
     /signup (all)
         get -> render page
-        post -> new user
+        post -> create new user (DONE)
     /login (all)
         get -> render page
         post -> authenticate and redirect
