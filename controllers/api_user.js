@@ -44,7 +44,8 @@ async function handle_post_create_new_user(req,res){
         if(err){
             return res.status(500).send(err);
         }
-        return res.status(200).json({"msg":"new user created"});
+        return res.redirect("/static/login");
+        // return res.status(200).json({"msg":"new user created"});
     })
 }
 

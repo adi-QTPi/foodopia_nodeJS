@@ -7,16 +7,22 @@
 </head>
 <body>
     <h1>Signup</h1>
-    <form method="post" action="/user/signup">
-        <label for="username">Enter username</label>
-        <input type="text" name="username" placeholder="enter your username">
-
-        <label for="email">Enter Email ID</label>
-        <input type="text" name="email" placeholder="email@id.com">
-        
+    <form method="post" action="/api/user/signup">
+        <label for="user_name">Enter Username</label>
+        <input type="text" name="user_name" placeholder="enter your username">
+        <br/>
+        <label for="name">Enter Full Name</label>
+        <input type="text" name="name">
+        <br/>
         <label for="password">Enter Password</label>
-        <input type="text" name="password" placeholder="***">
-
+        <input type="password" name="password" placeholder="***">
+        <br/>
+        <label for="role">Role</label>
+        <select name="role" id="">
+            <option value="customer">Customer</option>
+            <option value="cook">Cook</option>
+        </select>
+        <br/><br/>
         <button type="submit">Submit</button>
     </form>
 </body>
