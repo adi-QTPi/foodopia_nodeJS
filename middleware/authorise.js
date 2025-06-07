@@ -5,9 +5,10 @@ const { JWT_SECRET } = process.env;
 async function auth_check_if_logged_in(req,res,next){
     const obtained_token = req.cookies.token;
     if(!obtained_token){
-        return res.status(403).json({
-            "msg": "please LOGIN first to access this page"
-        })
+        // return res.status(403).json({
+        //     "msg": "please LOGIN first to access this page"
+        // })
+        return res.redirect("/static/login");
     }
     const curr_user = jwt.verify(obtained_token, JWT_SECRET);
     req.x_user = curr_user;

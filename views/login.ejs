@@ -7,14 +7,20 @@
 </head>
 <body>
     <h1>login</h1>
-    <form method="post" action="/user/login">
-        <label for="email">Enter email</label>
-        <input type="text" name="email" placeholder="example@email.com">
+    <form method="post" action="/api/user/login">
+        <label for="user_name">Enter email</label>
+        <input type="text" name="user_name" placeholder="user123">
         
         <label for="password">Enter Password</label>
-        <input type="text" name="password" placeholder="***">
+        <input type="password" name="password" placeholder="***">
 
         <button type="submit">Submit</button>
     </form>
+    <% if (err) { %>
+        <div>
+            <h5>error zone</h5>
+            <p><%= err %></p>
+        </div>
+    <% } %>
 </body>
 </html>

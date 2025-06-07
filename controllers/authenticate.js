@@ -12,7 +12,9 @@ async function handle_login_assign_jwt(req, res){
         httpOnly:true,
         secure : true,
         maxAge : 60000 * 60 * 24,
-    }).status(200).json({"msg":"login sucessfully, check cookie "});
+    }).status(200)
+    .redirect("/static/profile")
+    // .json({"msg":"login sucessfully, check cookie "})
 }
 
 module.exports = {

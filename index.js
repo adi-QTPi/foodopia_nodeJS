@@ -12,9 +12,11 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-const user_route_handler = require("./routes/user");
-app.use("/user", user_route_handler);
+const user_route_handler = require("./routes/api_users");
+app.use("/api/user", user_route_handler);
 
+const static_route_handler = require("./routes/static");
+app.use("/static", static_route_handler);
 
 app.listen(PORT, ()=>{
     console.log(`\nfoodopia server starts on port -> ${PORT}\n`);
