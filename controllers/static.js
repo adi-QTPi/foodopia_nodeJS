@@ -7,7 +7,12 @@ async function handle_render_profile_page(req,res){
     res.render("profile", {curr_user});
 }
 
+async function handle_render_signup_page(req,res){
+    res.render("signup");
+}
+
 module.exports = {
     handle_render_login_page,
     handle_render_profile_page,
+    handle_render_signup_page,
 }
