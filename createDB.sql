@@ -1,6 +1,5 @@
 -- Create database
 CREATE DATABASE foodopia_nodeJS;
-
 -- Use the database
 USE foodopia_nodeJS;
 
@@ -11,9 +10,9 @@ CREATE TABLE category (
     cat_description VARCHAR(500)
 );
 
--- User table
+-- User table with UUID user_id
 CREATE TABLE user (
-    user_id BIGINT PRIMARY KEY,
+    user_id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     user_name VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     pwd_hash VARCHAR(255) NOT NULL,
@@ -44,7 +43,7 @@ CREATE TABLE `order` (
     order_id BIGINT PRIMARY KEY,
     order_at TIMESTAMP NOT NULL,
     table_no BIGINT,
-    customer_id BIGINT NOT NULL,
+    customer_id VARCHAR(36) NOT NULL,
     status ENUM('received', 'cooking', 'ready_to_serve', 'paid'),
     FOREIGN KEY (customer_id) REFERENCES user(user_id),
     FOREIGN KEY (table_no) REFERENCES `table`(table_id)
