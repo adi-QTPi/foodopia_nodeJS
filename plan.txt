@@ -1,0 +1,22 @@
+/user
+    / (admin)
+        get -> show all users
+    /:id (admin)
+        get -> show a particular user
+        delete -> delete a particular user
+    /signup (all)
+        get -> render page
+        post -> new user
+    /login (all)
+        get -> render page
+        post -> authenticate and redirect
+
+/menu
+    / 
+        get -> show all items (all)
+        post -> add new item (admin, cook)
+    /:id 
+        get -> view a particular item (all)
+        put -> replace a particular item (admin)
+        patch -> edit a particular item (admin)
+        delete -> delete a particular item (admin)

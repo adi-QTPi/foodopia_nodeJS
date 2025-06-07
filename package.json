@@ -1,0 +1,27 @@
+{
+  "name": "foodopia_nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon run index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adi-QTPi/foodopia_nodeJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adi-QTPi/foodopia_nodeJS/issues"
+  },
+  "homepage": "https://github.com/adi-QTPi/foodopia_nodeJS#readme",
+  "description": "",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1",
+    "nodemon": "^3.1.10"
+  }
+}
