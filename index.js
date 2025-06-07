@@ -13,7 +13,6 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 const user_route_handler = require("./routes/user");
-
 app.use("/user", user_route_handler);
 
 
