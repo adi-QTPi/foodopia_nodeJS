@@ -12,6 +12,11 @@ const {
 } = require("../middleware/authenticate")
 
 const {
+    auth_restrict_to,
+    auth_check_if_logged_in,
+} = require("../middleware/authorise")
+
+const {
     handle_get_all_users,
     handle_get_user_by_id,
     handle_delete_user_by_id,
@@ -22,21 +27,23 @@ const {
     handle_login_assign_jwt,
 } = require("../controllers/authenticate");
 
+
+router
+    .route("/login")
+    .post(check_user_detail_entry_login,check_password_and_add_user_info,handle_login_assign_jwt);
+    
+router
+    .route("/signup")
+    .post(check_new_user_detail_entry_signup,hash_password,handle_post_create_new_user)
+
+router.use(auth_check_if_logged_in);
 router
     .route("/")
-    .get(handle_get_all_users)
+    .get(auth_restrict_to(["admin"]),handle_get_all_users)
 
 router  
     .route("/:id")
     .get(handle_get_user_by_id)
     .delete(handle_delete_user_by_id)
-
-router
-    .route("/signup")
-    .post(check_new_user_detail_entry_signup,hash_password,handle_post_create_new_user)
-
-router
-    .route("/login")
-    .post(check_user_detail_entry_login,check_password_and_add_user_info,handle_login_assign_jwt);
 
 module.exports = router;

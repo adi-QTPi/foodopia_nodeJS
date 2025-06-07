@@ -17,7 +17,11 @@ async function handle_get_user_by_id(req, res){
     db.query(sql_query, [user_id],(err, result, fields) => {
         if(err)return res.status(500).send(err);
         const result_obj = result[0];
-        console.log(result_obj);
+        if(!result_obj){
+            return res.status(404).json({
+                "msg": "no user found"
+            })
+        }
         return res.status(200).json(result_obj);
     })
 }
@@ -40,7 +44,6 @@ async function handle_post_create_new_user(req,res){
         if(err){
             return res.status(500).send(err);
         }
-        console.log("new entry added.");
         return res.status(200).json({"msg":"new user created"});
     })
 
