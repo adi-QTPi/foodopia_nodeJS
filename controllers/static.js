@@ -1,5 +1,8 @@
 async function handle_render_login_page(req, res){
-    res.render("login", {err:null});
+    // const error = req.flash("error");
+    const error = req.session.error;
+    req.session.error = null;
+    return res.render("login", {err:error});
 }
 
 async function handle_render_profile_page(req,res){
