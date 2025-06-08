@@ -7,19 +7,21 @@
 </head>
 <body>
     <h1>login</h1>
+    <% if (to_login_page && to_login_page.message) { %>
+        <div><%= to_login_page.message %></div>
+    <% } %>
     <form method="post" action="/api/user/login">
         <label for="user_name">Enter User Name</label>
-        <input type="text" name="user_name" placeholder="user123">
+        <input type="text" name="user_name" placeholder="user123" autofocus>
         
         <label for="password">Enter Password</label>
         <input type="password" name="password" placeholder="***">
 
         <button type="submit">Submit</button>
     </form>
-    <% if (err) { %>
+    <% if (to_login_page && to_login_page.error) { %>
         <div>
-            <h5>error</h5>
-            <p><%= err %></p>
+            <p><%= to_login_page.error %></p>
         </div>
     <% } %>
 </body>

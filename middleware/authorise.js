@@ -8,6 +8,9 @@ async function auth_check_if_logged_in(req,res,next){
         // return res.status(403).json({
         //     "msg": "please LOGIN first to access this page"
         // })
+        req.session.to_login_page = {
+            "message":"please log in to access the page."
+        }
         return res.redirect("/static/login");
     }
     const curr_user = jwt.verify(obtained_token, JWT_SECRET);

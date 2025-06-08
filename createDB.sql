@@ -5,7 +5,7 @@ USE foodopia_nodeJS;
 
 -- Category table (referenced by item table)
 CREATE TABLE category (
-    cat_id BIGINT PRIMARY KEY,
+    cat_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     cat_name VARCHAR(255) NOT NULL,
     cat_description VARCHAR(500)
 );
@@ -28,7 +28,7 @@ CREATE TABLE `table` (
 
 -- Item table
 CREATE TABLE item (
-    item_id BIGINT PRIMARY KEY,
+    item_id BIGINT AUTO_INCREMENT PRIMARY KEY ,
     item_name VARCHAR(255) NOT NULL,
     cook_time TIME,
     price BIGINT NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE item (
 
 -- Order table
 CREATE TABLE `order` (
-    order_id BIGINT PRIMARY KEY,
+    order_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_at TIMESTAMP NOT NULL,
     table_no BIGINT,
     customer_id VARCHAR(36) NOT NULL,
