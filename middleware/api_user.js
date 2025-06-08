@@ -6,7 +6,11 @@ async function check_new_user_detail_entry_signup(req, res, next){
     const { user_name, name, role, password } = req.body;
 
     if(!user_name || !name || !role || !password){
-        return res.status(400).json({"msg":"enter all fields please"});
+        // return res.status(400).json({"msg":"enter all fields please"});
+        req.session.to_signup_page = {
+            error:"enter all fields properly",
+        };
+        return res.redirect("../../static/signup");
     }
 
     let sql_query = `SELECT user_id FROM user WHERE user_name = ?`;
@@ -17,7 +21,11 @@ async function check_new_user_detail_entry_signup(req, res, next){
             next();
         }
         else{
-            res.status(400).json({"msg":"the username is taken... choose another username."})
+            // res.status(400).json({"msg":"the username is taken... choose another username."})
+            req.session.to_signup_page = {
+                error:"the username is taken... choose another username."
+            };
+            res.status(400).redirect("../../static/signup");
         }
     })
 }

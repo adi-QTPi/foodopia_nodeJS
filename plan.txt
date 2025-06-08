@@ -1,24 +1,31 @@
-/user
+/api/user
     / (admin) 
         get -> show all users (json response done)
     /:id (admin)
         get -> show a particular user (json response done)
         delete -> delete a particular user (DONE)
     /profile (all)
-        get -> show current user profile
         patch -> edit current user profile
         delete -> delete account by the current user
     /signup (all)
-        get -> render page
         post -> create new user (DONE)
     /login (all)
-        get -> render page
-        post -> authenticate and redirect
+        post -> authenticate and redirect (DONE)
 
-/menu
+/static
+    /profile (all)
+        get -> show current user profile (DONE)
+    /signup (all)
+        get -> render page (DONE)
+    /login (all)
+        get -> render page (DONE)
+    /menu
+        get -> render menu 
+
+/api/item
     / 
-        get -> show all items (all)
-        post -> add new item (admin, cook)
+        get -> show all items (all) (api done)
+        post -> add new item (admin) (api done)
     /:id 
         get -> view a particular item (all)
         put -> replace a particular item (admin)

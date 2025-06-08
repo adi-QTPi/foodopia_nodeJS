@@ -24,6 +24,12 @@ app.set("views", path.resolve("./views"));
 const user_route_handler = require("./routes/api_users");
 app.use("/api/user", user_route_handler);
 
+const item_route_handler = require("./routes/api_item");
+app.use("/api/item", item_route_handler);
+
+const cat_route_handler = require("./routes/api_cat");
+app.use("/api/cat", cat_route_handler);
+
 const static_route_handler = require("./routes/static");
 app.use("/static", static_route_handler);
 
