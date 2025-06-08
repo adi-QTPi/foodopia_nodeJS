@@ -4,10 +4,19 @@ const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const { db } = require("./models/foodopiaDB");
+const session = require("express-session");
+const flash = require("connect-flash");
+require("dotenv").config();
+const {SESSION_SECRET_KEY} = process.env;
 
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(cookieParser());
+app.use(session({
+    secret: SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: false
+}))
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
