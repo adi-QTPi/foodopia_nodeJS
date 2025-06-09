@@ -5,6 +5,7 @@ const {
     handle_render_login_page,
     handle_render_profile_page,
     handle_render_signup_page,
+    handle_render_menu_page,
 } = require ("../controllers/static");
 
 const { 
@@ -24,5 +25,8 @@ router.use(auth_check_if_logged_in)
 router
     .route("/profile")
     .get(handle_render_profile_page)
+router
+    .route("/menu")
+    .get(handle_render_menu_page)
 
 module.exports = router;

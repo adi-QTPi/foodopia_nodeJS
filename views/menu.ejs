@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu Page</h1>
+    <hr>
+    <div>
+        <h3>Current User</h3>
+        <p>name -> <%= to_menu_page.user.name %></p>
+        <p>user_name -> <%= to_menu_page.user.user_name %></p>
+        <p>role -> <%= to_menu_page.user.role %></p>
+    </div>
+    <hr>
+    <table>
+        <thead>
+            <th>SNo.</th>
+            <th>name</th>
+            <th>category</th>
+            <th>sub_cat</th>
+            <th>cook_time_min</th>
+            <th>price</th>
+        </thead>
+        <tbody>
+            <% let i = 1 %>
+            <% for( let items of to_menu_page.result ) { %>
+                <tr>
+                    <td><%= i %></td>
+                    <td><%= items.item_name %></td>
+                    <td><%= items.cat_name %></td>
+                    <td><%= items.subcat %></td>
+                    <td><%= items.cook_time_min %></td>
+                    <td><%= items.price %></td>
+                </tr>
+                <% i++; %>
+            <% } %>
+        </tbody>
+    </table>
+    <% if (to_menu_page.user.role === "admin") { %>
+        <hr>
+        <h3>Add item to the menu</h3>
+        <form action="/api/item" method ="post">
+            <label for="item_name">Item Name</label>
+            <input type="text" name="item_name">
+
+            <label for="price">Price</label>
+            <input type="text" name="price">
+
+            <label for="cat_id">Category</label>
+            <select name="cat_id" id="">
+                <option selected disabled></option>
+                <% for( let items of to_menu_page.result2) { %>
+                    <option value="<%= items.cat_id %>"><%= items.cat_name %></option>
+                <% } %>
+            </select>
+
+            <label for="subcat">Sub-Category</label>
+            <select name="subcat" id="">
+                <option selected disabled></option>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+            </select>
+
+            <label for="cook_time_min">Cook Time :</label>
+            <input type="number" name="cook_time_min" min="0" max="120">
+            <span>minutes</span>
+            </br>
+            <button type="submit">Submit</button>
+        </form>
+    <% } %>
+    <hr>
+    <form action="/api/user/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>

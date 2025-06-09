@@ -16,5 +16,14 @@
     <div>
         <p>role -> <%= curr_user.role %></p>
     </div>
+    <div>
+        <span>Checkout other pages</span></br>
+        <a href="/static/menu">
+            <button>Menu</button>
+        </a>
+        <form action="/api/user/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
 </body>
 </html>
