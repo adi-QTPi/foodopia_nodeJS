@@ -30,7 +30,7 @@ CREATE TABLE `table` (
 CREATE TABLE item (
     item_id BIGINT AUTO_INCREMENT PRIMARY KEY ,
     item_name VARCHAR(255) NOT NULL,
-    cook_time TIME,
+    cook_time_min BIGINT,
     price BIGINT NOT NULL,
     display_pic VARCHAR(500),
     cat_id BIGINT NOT NULL,

@@ -51,9 +51,20 @@ async function handle_post_create_new_user(req,res){
     })
 }
 
+async function handle_post_user_logout(req, res){
+    // req.cookies.token = null;
+    const to_login_page = {
+        message:"Successfully logged out."
+    }
+    req.session.to_login_page = to_login_page;
+    res.clearCookie("token");
+    return res.status(200).redirect("/static/login");
+}
+
 module.exports ={
     handle_get_all_users,
     handle_get_user_by_id,
     handle_delete_user_by_id,
     handle_post_create_new_user,
+    handle_post_user_logout,
 }
