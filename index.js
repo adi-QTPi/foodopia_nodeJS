@@ -17,6 +17,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+app.use(express.static('public'));
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -29,6 +30,9 @@ app.use("/api/item", item_route_handler);
 
 const cat_route_handler = require("./routes/api_cat");
 app.use("/api/cat", cat_route_handler);
+
+const orders_route_handler = require("./routes/api_orders");
+app.use("/api/orders", orders_route_handler)
 
 const static_route_handler = require("./routes/static");
 app.use("/static", static_route_handler);

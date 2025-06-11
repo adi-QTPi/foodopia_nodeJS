@@ -39,9 +39,21 @@ async function handle_render_menu_page(req,res){
     })
 }
 
+async function handle_render_cart_page(req,res){
+    res.render("cart");
+}
+
+async function handle_render_orders_page(req, res){
+    //user wise order disp
+    console.log("handle render orders page is called");
+    res.status(200).render("orders");
+}
+
 module.exports = {
     handle_render_login_page,
     handle_render_profile_page,
     handle_render_signup_page,
     handle_render_menu_page,
+    handle_render_cart_page,
+    handle_render_orders_page,
 }
