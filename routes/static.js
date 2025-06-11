@@ -6,6 +6,8 @@ const {
     handle_render_profile_page,
     handle_render_signup_page,
     handle_render_menu_page,
+    handle_render_cart_page,
+    handle_render_orders_page,
 } = require ("../controllers/static");
 
 const { 
@@ -28,5 +30,12 @@ router
 router
     .route("/menu")
     .get(handle_render_menu_page)
+router  
+    .route("/cart")
+    .get(handle_render_cart_page)
+router
+    .route("/orders") //show all order by particular user
+    .get(handle_render_orders_page)
+
 
 module.exports = router;
