@@ -18,7 +18,6 @@ const {
 
 const { 
     fetch_order_data_by_id,
-    assign_table_for_new_order,
 } = require("../middleware/static");
 
 router

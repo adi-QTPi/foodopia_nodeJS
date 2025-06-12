@@ -9,9 +9,16 @@ const {
     auth_check_if_logged_in, auth_restrict_to 
 } = require("../middleware/authorise");
 
+const {
+    update_order_status
+} = require("../middleware/static_cook")
+
 router.use(auth_check_if_logged_in, auth_restrict_to(["cook"]));
 router  
     .route("/")
-    .get(handle_render_cook_page)
+    .get(
+        update_order_status,
+        handle_render_cook_page
+    )
 
 module.exports = router;
