@@ -90,12 +90,12 @@ async function handle_post_orders(req, res){
         }
         const order_id = Number(result.insertId);
         const req_body = req.body;
-        sql_query = "INSERT INTO item_order (order_id, item_id, quantity, instruction, is_complete) VALUES (?, ?, ?, ?, ?);"
+        sql_query = "INSERT INTO item_order (order_id, item_id, quantity, instruction) VALUES (?, ?, ?, ?);"
         res.status(200).json({
             msg:"order to ban gya deal done"
         })
         for(let item of req_body){
-            db.query(sql_query, [order_id, item.item_id, item.quantity, item.instruction,0], (err,result,fields)=>{
+            db.query(sql_query, [order_id, item.item_id, item.quantity, item.instruction], (err,result,fields)=>{
                 if(err){
                     return res.status(500).json(err);
                 }

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook Page</title>
+</head>
+<body>
+    <h2>Cook page, item status change</h2>
+    <hr>
+    <div>
+        <h3>Current User</h3>
+        <p>name -> <%= to_cook_page.x_user.name %></p>
+        <p>user_name -> <%= to_cook_page.x_user.user_name %></p>
+        <p>role -> <%= to_cook_page.x_user.role %></p>
+    </div>
+    <hr>
+
+    <h3>Taken By You</h3>
+    <table>
+        <thead>
+            <th>Table Number</th>
+            <th>order id</th>
+            <th>item name</th>
+            <th>quantity</th>
+            <th>Special Instructions</th>
+            <th>Current Status</th>
+        </thead>
+        <tbody>
+            <% 
+            const taken_by_this_cook = to_cook_page.item_to_cook.filter(item => 
+                item.cook_id === to_cook_page.x_user.user_id && item.is_complete === "taken"
+            );
+            %>
+            <% for(let items of taken_by_this_cook) { %>
+                <tr>
+                    <td><%= items.table_no %></td>
+                    <td><%= items.order_id %></td>
+                    <td><%= items.item_name %></td>
+                    <td><%= items.quantity %></td>
+                    <% if (!items.instruction) { %>
+                    <td>None</td>
+                    <% } else { %>
+                    <td><%= items.instruction %></td>
+                    <% } %>
+                    <td><%= items.is_complete %></td>
+                    <% if (items.is_complete === "taken") { %>
+                        <td>
+                            <form action="/api/cook" method="post">
+                                <input type="hidden" name="order_id" value="<%= items.order_id %>">
+                                <input type="hidden" name="item_id" value="<%= items.item_id %>">
+                                <input type="hidden" name="is_complete" value="complete">
+                                <button type="submit">Mark Complete</button>
+                            </form>
+                        </td>
+                    <% } else { %>
+                        <td>
+                            Completed
+                        </td>
+                    <% } %>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <hr>
+    <h3>All items</h3>
+    <table>
+        <thead>
+            <th>Table Number</th>
+            <th>order id</th>
+            <th>item name</th>
+            <th>quantity</th>
+            <th>Special Instructions</th>
+            <th>Current Status</th>
+        </thead>
+        <tbody>
+            <% for(let items of to_cook_page.item_to_cook) { %>
+                <tr>
+                    <td><%= items.table_no %></td>
+                    <td><%= items.order_id %></td>
+                    <td><%= items.item_name %></td>
+                    <td><%= items.quantity %></td>
+                    <% if (!items.instruction) { %>
+                    <td>None</td>
+                    <% } else { %>
+                    <td><%= items.instruction %></td>
+                    <% } %>
+                    <td><%= items.is_complete %></td>
+                    <% if (items.is_complete === "pending") { %>
+                        <td>
+                            <form action="/api/cook" method="post">
+                                <input type="hidden" name="order_id" value="<%= items.order_id %>">
+                                <input type="hidden" name="item_id" value="<%= items.item_id %>">
+                                <input type="hidden" name="is_complete" value="taken">
+                                <button type="submit">Take Item</button>
+                            </form>
+                        </td>
+                    <% } %>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

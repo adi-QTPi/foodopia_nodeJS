@@ -15,8 +15,8 @@ async function handle_post_category(req, res){
     let sql_query = `INSERT INTO category (cat_name, cat_description) VALUES (?,?)`;
     db.query(sql_query, [cat_name, cat_description], (err, result, fields)=>{
         if(err)return res.json(err);
-        console.log("reached handle post req");
-        return res.status(200).json({"msg": "inserted successfully", result});
+        // return res.status(200).json({"msg": "inserted successfully", result});
+        return res.status(200).redirect("/static/menu");
     });
 }
 

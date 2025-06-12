@@ -21,6 +21,13 @@
         <a href="/static/menu">
             <button>Menu</button>
         </a>
+        </br>
+        <% if (curr_user.role === "cook") { %>
+        <a href="/static/cook">
+            <button>manage cooking items</button>
+        </a>
+        <% } %>
+        
         <form action="/api/user/logout" method="post">
             <button type="submit">Logout</button>
         </form>

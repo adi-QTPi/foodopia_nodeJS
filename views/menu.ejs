@@ -31,9 +31,11 @@
                         <td><%= items.cook_time_min %> minutes</td>
                         <td>Rs. <%= items.price %></td>
                         <td>
-                            <button class = "add-to-cart" id="<%= items.item_id %>">
-                                add to cart
-                            </button>
+                            <% if (to_menu_page.user.role === "customer") { %>
+                                <button class = "add-to-cart" id="<%= items.item_id %>">
+                                    add to cart
+                                </button>
+                            <% } %>
                         </td>
                     </tr>
                 <% } %>
@@ -41,36 +43,6 @@
         <% } %>
     </table>
 
-    <!-- <table>
-        <thead>
-            <th>SNo.</th>
-            <th>name</th>
-            <th>category</th>
-            <th>sub_cat</th>
-            <th>cook_time_min</th>
-            <th>price</th>
-            <th>add to cart</th>
-        </thead>
-        <tbody>
-            <% let i = 1 %>
-            <% for( let items of to_menu_page.result ) { %>
-                <tr>
-                    <td><%= i %></td>
-                    <td><%= items.item_name %></td>
-                    <td><%= items.cat_name %></td>
-                    <td><%= items.subcat %></td>
-                    <td><%= items.cook_time_min %></td>
-                    <td><%= items.price %></td>
-                    <td>
-                        <button class = "add-to-cart" id="<%= items.item_id %>">
-                            add to cart
-                        </button>
-                    </td>
-                </tr>
-                <% i++; %>
-            <% } %>
-        </tbody>
-    </table> -->
     <% if (to_menu_page.user.role === "admin") { %>
         <hr>
         <h3>Add item to the menu</h3>
@@ -100,6 +72,19 @@
             <label for="cook_time_min">Cook Time :</label>
             <input type="number" name="cook_time_min" min="0" max="120">
             <span>minutes</span>
+            </br>
+            <button type="submit">Submit</button>
+        </form>
+
+        <hr>
+        <h3>Add Category to the menu</h3>
+        <form action="/api/cat" method ="post">
+            <label for="cat_name">Category Name</label>
+            <input type="text" name="cat_name">
+
+            <label for="cat_description">Category Description</label>
+            <input type="text" name="cat_description">
+
             </br>
             <button type="submit">Submit</button>
         </form>
