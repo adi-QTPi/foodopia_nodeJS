@@ -36,7 +36,7 @@ router
 router
     .route("/menu")
     .get(
-        auth_restrict_to(["customer", "admin"]),
+        auth_restrict_to(["customer", "admin", "cook"]),
         handle_render_menu_page
     )
 router  
@@ -51,11 +51,11 @@ router
         auth_restrict_to(["customer"]),
         handle_render_orders_page
     )
-router  
-    .route("/orders/:id")
-    .get(
-        fetch_order_data_by_id,
-        handle_render_order_by_id
-    )
+// router  
+//     .route("/orders/:id")
+//     .get(
+//         fetch_order_data_by_id,
+//         handle_render_order_by_id
+//     )
 
 module.exports = router;
