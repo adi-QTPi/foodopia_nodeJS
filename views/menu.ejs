@@ -19,7 +19,29 @@
     </div>
     <hr>
 
+    <!-- <%= JSON.stringify(to_menu_page) %> -->
     <table>
+        <% for( let categories of to_menu_page.result2) { %>
+            <th><%= categories.cat_name %></th>
+            <% for( let items of to_menu_page.result ) { %>
+                <% if (items.cat_id === categories.cat_id) { %>
+                    <tr>
+                        <td><%= items.item_name %></td>
+                        <td><%= items.sub_cat %></td>
+                        <td><%= items.cook_time_min %> minutes</td>
+                        <td>Rs. <%= items.price %></td>
+                        <td>
+                            <button class = "add-to-cart" id="<%= items.item_id %>">
+                                add to cart
+                            </button>
+                        </td>
+                    </tr>
+                <% } %>
+            <% } %>
+        <% } %>
+    </table>
+
+    <!-- <table>
         <thead>
             <th>SNo.</th>
             <th>name</th>
@@ -48,7 +70,7 @@
                 <% i++; %>
             <% } %>
         </tbody>
-    </table>
+    </table> -->
     <% if (to_menu_page.user.role === "admin") { %>
         <hr>
         <h3>Add item to the menu</h3>

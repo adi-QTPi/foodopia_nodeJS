@@ -6,6 +6,22 @@
     <title>Orders page</title>
 </head>
 <body>
-    <h3>Orders Page</h3>
+    <h2>Orders Page</h2>
+    <hr>
+    <h4>User Details</h4>
+    <div>name -> <%= to_orders_page.x_user.name %></div>
+    <div>user_name -> <%= to_orders_page.x_user.user_name %></div>
+    <div>role -> <%= to_orders_page.x_user.role %></div>
+    <hr>
+    <% for(let order of to_orders_page.order_details) { %>
+        <hr>
+        <div> Order ID -> <%= order.order_id %></div>
+        <div>Table number -> <%= order.table_no %></div>
+        <div> Time -> <%= order.order_at %></div>
+        <div> Total Price -> <%= order.total_price %></div>
+        <div> Status -> <%= order.status %></div>
+        <hr>
+    <% } %>
+    <hr>
 </body>
 </html>

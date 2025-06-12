@@ -8,12 +8,18 @@ const {
     handle_render_menu_page,
     handle_render_cart_page,
     handle_render_orders_page,
+    handle_render_order_by_id,
 } = require ("../controllers/static");
 
 const { 
     auth_check_if_logged_in, 
     auth_restrict_to
 } = require("../middleware/authorise");
+
+const { 
+    fetch_order_data_by_id,
+    assign_table_for_new_order,
+} = require("../middleware/static");
 
 router
     .route("/login")
@@ -29,13 +35,27 @@ router
     .get(handle_render_profile_page)
 router
     .route("/menu")
-    .get(handle_render_menu_page)
+    .get(
+        auth_restrict_to(["customer", "admin"]),
+        handle_render_menu_page
+    )
 router  
     .route("/cart")
-    .get(handle_render_cart_page)
+    .get(
+        auth_restrict_to(["customer"]),
+        handle_render_cart_page
+    )
 router
     .route("/orders") //show all order by particular user
-    .get(handle_render_orders_page)
-
+    .get(
+        auth_restrict_to(["customer"]),
+        handle_render_orders_page
+    )
+router  
+    .route("/orders/:id")
+    .get(
+        fetch_order_data_by_id,
+        handle_render_order_by_id
+    )
 
 module.exports = router;

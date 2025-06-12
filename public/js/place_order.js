@@ -26,10 +26,22 @@ for (let element of document.getElementsByClassName("add-to-cart")){
             item_in_cart.push(new_item_for_cart);
             console.log(item_in_cart);
         }
+        toggle_to_cart_button_visibility();
     })
 }
 
 const to_cart_button = document.getElementsByClassName("to_cart_button")[0];
+to_cart_button.style.display = "none";
+
+async function toggle_to_cart_button_visibility(){
+    if(!item_in_cart.length){
+        to_cart_button.style.display = "none";
+    }
+    else{
+        to_cart_button.style.display = "block";
+    }
+}
+
 to_cart_button.addEventListener("click", ()=>{
     sessionStorage.setItem("to_menu_page", JSON.stringify(to_menu_page));
     sessionStorage.setItem("item_in_cart", JSON.stringify(item_in_cart));
