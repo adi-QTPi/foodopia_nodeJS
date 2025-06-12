@@ -20,7 +20,7 @@
     /login (all)
         get -> render page (DONE)
     /menu
-        get -> render menu 
+        get -> render menu (DONE)
 
 /api/item
     / 

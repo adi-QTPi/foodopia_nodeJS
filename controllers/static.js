@@ -44,9 +44,34 @@ async function handle_render_cart_page(req,res){
 }
 
 async function handle_render_orders_page(req, res){
-    //user wise order disp
-    console.log("handle render orders page is called");
-    res.status(200).render("orders");
+    //user wise order displau
+    const curr_user = req.x_user;
+
+    const user_id = curr_user.user_id;
+
+    let sql_query = "SELECT order_id, table_no, order_at, status, total_price FROM `order` WHERE customer_id = ?;";
+
+    db.query(sql_query, [user_id],(err, result, fields)=>{
+        if(err) return res.status(500).json(err);
+        console.log(result);
+        let to_orders_page = {
+            x_user : curr_user,
+            order_details : result,
+        }
+
+        if(req.session.to_orders_page){
+            to_orders_page = {
+                ...req.session.to_orders_page,
+                ...to_orders_page,
+            }
+        }
+        
+        res.status(200).render("orders", {to_orders_page});
+    })
+}
+
+async function handle_render_order_by_id(req, res){
+
 }
 
 module.exports = {
@@ -56,4 +81,5 @@ module.exports = {
     handle_render_menu_page,
     handle_render_cart_page,
     handle_render_orders_page,
+    handle_render_order_by_id,
 }
