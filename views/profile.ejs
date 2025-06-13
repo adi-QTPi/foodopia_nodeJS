@@ -19,12 +19,21 @@
     <div>
         <span>Checkout other pages</span></br>
         <a href="/static/menu">
-            <button>Menu</button>
+            <% if (curr_user.role === "admin") { %>
+                <button>Manage Menu</button>
+            <% } else { %>
+                <button>Menu</button>
+            <% } %>
         </a>
         </br>
         <% if (curr_user.role === "cook") { %>
         <a href="/static/cook">
             <button>manage cooking items</button>
+        </a>
+        <% } %>
+        <% if (curr_user.role === "admin") { %>
+        <a href="/static/admin">
+            <button>Manage Orders</button>
         </a>
         <% } %>
         
