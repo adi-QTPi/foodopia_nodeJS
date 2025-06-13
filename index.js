@@ -37,8 +37,14 @@ app.use("/api/orders", orders_route_handler)
 const cook_route_handler = require("./routes/api_cook");
 app.use("/api/cook", cook_route_handler);
 
+const admin_route_handler = require("./routes/api_admin");
+app.use("/api/admin", admin_route_handler);
+
 const static_cook_route_handler = require("./routes/static_cook");
 app.use("/static/cook", static_cook_route_handler);
+
+const static_admin_route_handler = require("./routes/static_admin");
+app.use("/static/admin", static_admin_route_handler);
 
 const static_route_handler = require("./routes/static");
 app.use("/static", static_route_handler);

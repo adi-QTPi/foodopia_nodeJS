@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <h2>Admin page</h2>
+    <hr>
+    <div>
+        <h3>Current User</h3>
+        <p>name -> <%= to_admin_page.x_user.name %></p>
+        <p>user_name -> <%= to_admin_page.x_user.user_name %></p>
+        <p>role -> <%= to_admin_page.x_user.role %></p>
+    </div>
+    <hr>
+    <form action="/api/admin/orders_by_date" method="post">
+        <label for="date">Choose the Date -> </label>
+        <input type="date" value="<%= to_admin_page.page_date %>" name="date">
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <table>
+        <thead>
+            <th>Table Number</th>
+            <th>Customer name</th>
+            <th>Order ID</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            <% for( let orders of to_admin_page.order_data_date_wise) { %>
+                <tr>
+                    <td><%= orders.table_no %></td>
+                    <td><%= orders.customer_name %></td>
+                    <td><%= orders.order_id %></td>
+                    <td><%= orders.status %></td>
+                    <% if (orders.status === "ready_to_serve") { %>
+                        <td>
+                            <button>Generate Bill</button>
+                        </td>
+                    <% } else{ %>
+                        <td>
+                            <button>Details</button>
+                        </td>
+                    <% } %>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <hr>
+    <form action="/api/user/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>

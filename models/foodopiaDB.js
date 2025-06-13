@@ -5,7 +5,7 @@ const db = mysql.createConnection({
     user:"root",
     password: "127west26",
     multipleStatements:true,
-    database: "foodopia_nodeJS"
+    database: "foodopia_nodeJS",
 }) 
 
 db.connect((err)=>{
