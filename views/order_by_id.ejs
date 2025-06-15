@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>one order page</title>
+</head>
+<body>
+    <hr>
+    <div>
+        <h3>Current User</h3>
+        <p>name -> <%= to_order_by_id_page.x_user.name %></p>
+        <p>user_name -> <%= to_order_by_id_page.x_user.user_name %></p>
+        <p>role -> <%= to_order_by_id_page.x_user.role %></p>
+    </div>
+    <hr>
+
+    <h2>order #<%= to_order_by_id_page.order_data[0].order_id %></h2>
+    <h3>status -> <%= to_order_by_id_page.order_data[0].order_status %></h3>
+
+    <% if (to_order_by_id_page.x_user.role === "admin") { %>
+        <div>ordered By -> <%= to_order_by_id_page.order_data[0].customer_name %></div>
+    <% } %>
+    
+    <div>ordered @<%= to_order_by_id_page.order_data[0].order_at %></div>
+    <div>table number -> <%= to_order_by_id_page.order_data[0].table_no %></div>
+
+    <hr>
+    <table>
+        <thead>
+            <th>S.No.</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Progress</th>
+            <th>Instruction</th>
+        </thead>
+        <tbody>
+            <% let x = 1 %>
+            <% for(let items of to_order_by_id_page.order_data) { %>
+            <tr>
+                <td><%= x %></td>
+                <% x++; %>
+                <td><%= items.item_name %></td>
+                <td><%= items.quantity %></td>
+                <td><%= items.price * items.quantity %></td>
+                <td><%= items.is_complete %></td>
+                <% if (items.is_complete !== "complete") { %>
+                    <% if(!items.instruction) { %>
+                        <td>na</td>
+                    <% } else { %>
+                        <td><%= items.instruction %></td>
+                    <% } %>
+                <% } %>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <hr>
+    <div>Total -> <%= to_order_by_id_page.order_data[0].total_price %></div>
+    <hr><hr>
+
+    <% if (to_order_by_id_page.order_data[0].order_status === "ready_to_serve" && to_order_by_id_page.x_user.role === "customer") { %>
+        <div>Happy to Serve you...</div>
+        <form method="post" action="/api/pay">
+            <input type="hidden" name="order_id" value=<%= to_order_by_id_page.order_data[0].order_id %> >
+            <input type="hidden" name="total_amount" value=<%= to_order_by_id_page.order_data[0].total_price %> >
+            <input type="text" name="customer_review" placeholder="Your Reviews matter !">
+            <button type="submit">Pay</button>
+        </form>
+    <% } %>
+</body>
+</html>

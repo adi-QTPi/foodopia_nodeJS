@@ -35,15 +35,15 @@
                     <td><%= orders.customer_name %></td>
                     <td><%= orders.order_id %></td>
                     <td><%= orders.status %></td>
-                    <% if (orders.status === "ready_to_serve") { %>
-                        <td>
-                            <button>Generate Bill</button>
-                        </td>
-                    <% } else{ %>
-                        <td>
-                            <button>Details</button>
-                        </td>
-                    <% } %>
+                    <td>
+                        <form method="get" action="/static/orders/<%= orders.order_id %>">
+                            <% if (orders.status === "paid") { %>
+                                <button type="submit">View Bill</button>
+                            <% } else { %>
+                                <button type="submit">Details</button>
+                            <% } %>
+                        </form>
+                    </td>
                 </tr>
             <% } %>
         </tbody>

@@ -40,6 +40,9 @@ app.use("/api/cook", cook_route_handler);
 const admin_route_handler = require("./routes/api_admin");
 app.use("/api/admin", admin_route_handler);
 
+const pay_route_handler = require("./routes/api_pay");
+app.use("/api/pay", pay_route_handler);
+
 const static_cook_route_handler = require("./routes/static_cook");
 app.use("/static/cook", static_cook_route_handler);
 
