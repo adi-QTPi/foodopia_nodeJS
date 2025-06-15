@@ -26,7 +26,9 @@ router
 
 router
     .route("/signup")
-    .get(handle_render_signup_page)
+    .get(
+        handle_render_signup_page
+    )
 
 router.use(auth_check_if_logged_in)
 router
@@ -45,16 +47,16 @@ router
         handle_render_cart_page
     )
 router
-    .route("/orders") //show all order by particular user
+    .route("/orders")
     .get(
         auth_restrict_to(["customer"]),
         handle_render_orders_page
     )
-// router  
-//     .route("/orders/:id")
-//     .get(
-//         fetch_order_data_by_id,
-//         handle_render_order_by_id
-//     )
+router  
+    .route("/orders/:id")
+    .get(
+        fetch_order_data_by_id,
+        handle_render_order_by_id
+    )
 
 module.exports = router;

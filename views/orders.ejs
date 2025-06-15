@@ -20,6 +20,17 @@
         <div> Time -> <%= order.order_at %></div>
         <div> Total Price -> <%= order.total_price %></div>
         <div> Status -> <%= order.status %></div>
+        <form method="get" action="/static/orders/<%= order.order_id %>">
+            <button type="submit">
+            <% if (order.status === "ready_to_serve") { %>
+                Pay
+            <% } else if (order.status === "Paid") { %>
+                Bill
+            <% } else { %>
+                Details
+            <% } %>
+            </button>
+        </form>
         <hr>
     <% } %>
     <hr>

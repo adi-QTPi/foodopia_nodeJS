@@ -67,7 +67,6 @@ CREATE TABLE item_order (
 -- Paid_orders table (derived table for paid orders)
 CREATE TABLE paid_orders (
     order_id BIGINT PRIMARY KEY,
-    bill_no BIGINT NOT NULL,
     customer_review VARCHAR(1000),
     total_amount BIGINT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES `order`(order_id)

@@ -44,18 +44,25 @@ async function render_cart(item_in_cart){
         const minus_button = new_el.querySelector(".minus-btn");
         const plus_button = new_el.querySelector(".plus-btn");
         const delete_button = new_el.querySelector(".delete-btn");
+        const quantity_space = new_el.getElementsByClassName("qty-display")[0];
+        const subtotal_space = new_el.getElementsByClassName("subtotal")[0];
 
         minus_button.addEventListener("click", () => {
             if (items.quantity > 1){
                 items.quantity--;
-                render_cart(item_in_cart);
+                quantity_space.innerText = items.quantity; 
+                subtotal_space.innerText = items.quantity * items.price;
             }
-            else render_cart(item_in_cart);
+            else {
+                quantity_space.innerText = items.quantity;
+                subtotal_space.innerText = items.quantity * items.price;
+            }
         });
         
         plus_button.addEventListener("click", () => {
             items.quantity++;
-            render_cart(item_in_cart);
+            quantity_space.innerText = items.quantity;
+            subtotal_space.innerText = items.quantity * items.price;
         });
 
         delete_button.addEventListener("click", ()=>{
