@@ -16,6 +16,12 @@ async function fetch_order_data_by_id(req, res, next){
     });
 }
 
+async function check_if_date_given(req,res,next){
+    console.log(req.body);
+    next();
+}
+
 module.exports = {
     fetch_order_data_by_id,
+    check_if_date_given,
 }

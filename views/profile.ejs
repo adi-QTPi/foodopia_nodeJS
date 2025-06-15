@@ -14,7 +14,7 @@
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
     <a class="navbar-brand mx-2 fs-2" href="/static/profile">Foodop1a</a>
 
-    <span class="navbar-text position-absolute start-50 translate-middle-x">Your Cravings... Our Responsibility</span>
+    <span class="navbar-text position-absolute start-50 translate-middle-x">Your <span class="truculenta-normal fs-3">Cravings...</span> Our <span class="truculenta-normal fs-3">Responsibility</span></span>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,9 +27,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="/static/menu">Menu</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/static/orders">Orders</a>
-            </li>
+            <% if (curr_user.role === "admin") { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/admin">Manage Orders</a>
+                </li>
+            <% } %>
+            <% if (curr_user.role === "customer") { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/orders">Your Orders</a>
+                </li>
+            <% } %>
+            <% if (curr_user.role === "cook") { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/orders">Cook</a>
+                </li>
+            <% } %>
             <li class="nav-item">
                 <form action="/api/user/logout" method="post">
                     <button class="btn btn-dark" type="submit">Logout</button>
@@ -39,7 +51,7 @@
     </div>
 </nav>
 <body>
-    <div class="col-12 d-flex align-items-center justify-content-center bg-image vh-30">
+    <div class="col-12 d-flex align-items-center justify-content-center bg-image vh-50">
         <h2 class="p-3 rounded-4 home-page-logo">Foodop1a</h2>
     </div>
 

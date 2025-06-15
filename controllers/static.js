@@ -46,16 +46,33 @@ async function handle_render_cart_page(req,res){
 async function handle_render_orders_page(req, res){
     //user wise order displau
     const curr_user = req.x_user;
-
     const user_id = curr_user.user_id;
 
-    let sql_query = "SELECT order_id, table_no, order_at, status, total_price FROM `order` WHERE customer_id = ? ORDER BY order_at DESC;";
+    let date_in_query = ""; 
+    let sql_query = "";
+    if(req.session.date_to_fetch_order_for){
+        date_in_query = req.session.date_to_fetch_order_for;
+        sql_query = "SELECT order_id, table_no, order_at, status, total_price FROM `order` WHERE customer_id = ? AND DATE(order_at) = ? ORDER BY order_at DESC;"
+        req.session.to_orders_page = {
+            ...req.session.to_orders_page,
+            page_date: date_in_query,
+        }
+    }
+    else{
+        date_in_query = [];
+        sql_query = "SELECT order_id, table_no, order_at, status, total_price FROM `order` WHERE customer_id = ? AND DATE(order_at) = CURDATE() ORDER BY order_at DESC;"
+        req.session.to_orders_page = {
+            ...req.session.to_order_page,
+            page_date: new Date().toLocaleDateString('en-CA'),
+        };
+    }
 
-    db.query(sql_query, [user_id],(err, result, fields)=>{
+    db.query(sql_query, [user_id, date_in_query],(err, result, fields)=>{
         if(err) return res.status(500).json(err);
         let to_orders_page = {
             x_user : curr_user,
             order_details : result,
+            // page_date : new Date().toLocaleDateString('en-CA'),
         }
 
         if(req.session.to_orders_page){

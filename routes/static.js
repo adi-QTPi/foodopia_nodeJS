@@ -18,6 +18,7 @@ const {
 
 const { 
     fetch_order_data_by_id,
+    check_if_date_given,
 } = require("../middleware/static");
 
 router
@@ -50,6 +51,7 @@ router
     .route("/orders")
     .get(
         auth_restrict_to(["customer"]),
+        check_if_date_given,
         handle_render_orders_page
     )
 router  
