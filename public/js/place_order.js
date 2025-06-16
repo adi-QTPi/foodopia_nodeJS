@@ -8,35 +8,66 @@ const go_to_cart_space_text = document.getElementsByClassName("go-to-cart-space-
 
 console.log('Menu:', to_menu_page);
 
-for (let element of document.getElementsByClassName("add-to-cart")){
-    let id = Number(element.id);
-    element.addEventListener("click", ()=>{
+// for (let element of document.getElementsByClassName("add-to-cart")){
+//     let id = Number(element.id);
+//     element.addEventListener("click", ()=>{
+//         if(item_in_cart.find((item)=>item.item_id === id)){
+//             const item_index = item_in_cart.findIndex(item=> item.item_id === id);
+//             element.innerText = "add to cart";
+//             element.classList.remove("btn-dark");
+//             element.classList.add("btn-danger");
+//             item_in_cart.splice(item_index, 1);
+//         }
+//         else{
+//             console.log("its not in cart");
+//             let new_item_for_cart = {
+//                 item_id:id,
+//                 item_name:(to_menu_page.result.find((element)=>element.item_id ===id)).item_name,
+//                 price:(to_menu_page.result.find((element)=>element.item_id === id)).price,
+//                 quantity:1,
+//                 instruction:null
+//             }
+//             element.innerText = "Remove";
+//             element.classList.remove("btn-danger");
+//             element.classList.add("btn-dark")
+//             item_in_cart.push(new_item_for_cart);
+//         }
+
+//         toggle_to_cart_button_visibility();
+//         update_text_in_element(go_to_cart_space_text, `You have <span class="caveat-cursive fs-1"> ${item_in_cart.length} </span> item(s) in your cart !`);
+//     });
+// }
+
+document.addEventListener("click", function(event){
+    if(event.target.classList.contains("add-to-cart")){
+        let id = Number(event.target.id);
         if(item_in_cart.find((item)=>item.item_id === id)){
             const item_index = item_in_cart.findIndex(item=> item.item_id === id);
-            element.innerText = "add to cart";
-            element.classList.remove("btn-dark");
-            element.classList.add("btn-danger");
+            event.target.innerText = "add to cart";
+            event.target.classList.remove("btn-dark");
+            event.target.classList.add("btn-danger");
             item_in_cart.splice(item_index, 1);
         }
         else{
             console.log("its not in cart");
             let new_item_for_cart = {
                 item_id:id,
-                item_name:(to_menu_page.result.find((element)=>element.item_id ===id)).item_name,
-                price:(to_menu_page.result.find((element)=>element.item_id === id)).price,
+                item_name:(to_menu_page.result.find((el)=>el.item_id ===id)).item_name,
+                price:(to_menu_page.result.find((el)=>el.item_id === id)).price,
                 quantity:1,
                 instruction:null
             }
-            element.innerText = "Remove";
-            element.classList.remove("btn-danger");
-            element.classList.add("btn-dark")
+            event.target.innerText = "Remove";
+            event.target.classList.remove("btn-danger");
+            event.target.classList.add("btn-dark")
             item_in_cart.push(new_item_for_cart);
         }
 
+        toggle_add_to_cart_button_label();
         toggle_to_cart_button_visibility();
         update_text_in_element(go_to_cart_space_text, `You have <span class="caveat-cursive fs-1"> ${item_in_cart.length} </span> item(s) in your cart !`);
-    })
-}
+    }
+})
 
 toggle_to_cart_space_visibility("none");
 
@@ -61,6 +92,7 @@ for (let filter of filter_buttons){
         }
         create_filtered_menu(selected_filters);
         render_filtered_menu(filtered_menu);
+        toggle_add_to_cart_button_label();
         console.log(selected_filters);
     })
 }
@@ -77,6 +109,7 @@ clear_filter_button.addEventListener("click", ()=>{
     console.log(selected_filters);
     create_filtered_menu(selected_filters);
     render_filtered_menu(filtered_menu);
+    toggle_add_to_cart_button_label();
 })
 
 async function toggle_to_cart_button_visibility(){
@@ -91,6 +124,25 @@ async function toggle_to_cart_button_visibility(){
         // to_cart_button.style.display = "block";
     }
 }
+
+async function toggle_add_to_cart_button_label(){
+    let add_to_cart_buttons = document.getElementsByClassName("add-to-cart");
+    for(let buttons of add_to_cart_buttons){
+        let id = Number(buttons.id);
+        buttons.classList.remove("btn-danger", "btn-dark");
+        buttons.innerText = "";
+        if(item_in_cart.some((item)=> item.item_id === id)){
+            buttons.classList.add("btn-dark");
+            buttons.innerText = "Remove from Cart";
+        }
+        else {
+            buttons.classList.add("btn-danger");
+            buttons.innerText = "Add to Cart"
+        }
+    }
+    console.log("due to toggle add to cart button label: item_in_Cart = ",item_in_cart);
+}
+
 async function toggle_to_cart_space_visibility(vis_value){
     for(let ch of go_to_cart_space.children){
         ch.style.display = vis_value;
@@ -144,9 +196,9 @@ async function render_filtered_menu(filtered_menu){
             </div>
             <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
                 <div class="fs-3">₹ ${items.price}</div>
-                <button class="add-to-cart btn btn-danger" id="${items.item_id}">Add To Cart</button>
+                <button class="add-to-cart btn btn-danger" id="${items.item_id}">Add to Cart</button>
             </div>
-        `
+        `;
         menu_space.appendChild(new_el);
     }
     filtered_menu_space.appendChild(menu_space);
