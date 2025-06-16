@@ -62,9 +62,13 @@
 .btn-filter-clicked{
     /* color: #34CB99; */
     /* color: #cb3466; */
-    color: white;
+    color: black;
     background: #34CB99;
     border: none;
+}
+
+.clear-filter-button{
+    cursor: pointer;
 }
 
 .text-queen-pink{
@@ -121,4 +125,29 @@
 
 .card-orders-page{
     width:40vw;
+}
+
+.card-menu-page{
+    width: 40vw;
+}
+
+.full-menu-space{
+    background-color: beige;
+    width: 90vw;
+    margin: auto;
+    border-radius: 3rem;
+}
+.filtered-menu-space{
+    width: 90vw;
+    margin: auto;
+    border-radius: 3rem;
+}
+
+.go-to-cart-space{
+    background-color: #cb3466;
+    border: solid 0.2rem white;
+}
+.to_cart_button{
+    /* color: #cb3466;
+    background-color: white; */
 }
