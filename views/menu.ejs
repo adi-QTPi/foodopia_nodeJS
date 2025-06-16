@@ -70,12 +70,8 @@
         <div class="clear-filter-button flex-shrink-1 p-2 text-queen-pink fs-4 border-filter border-filter-clear ms-auto mx-1 caveat-cursive">Clear</div>
     </div>
 
-    <!-- filtered -->
-    <div class="filtered-menu-space py-3 my-2">
+    <div class="filtered-menu-space py-3 my-2"></div>
 
-    </div>
-
-    <!-- ful menu -->
     <div class="full-menu-space py-3 my-2">
         <div class="fs-2 text-center">Complete Menu</div>
         <div
@@ -94,7 +90,9 @@
                     </div>
                     <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
                         <div class="fs-3">₹<%= items.price %></div>
-                        <button class="add-to-cart btn btn-danger" id="<%=items.item_id%>">Add to Cart</button>
+                        <% if (to_menu_page.user.role === "customer") { %>
+                            <button class="add-to-cart btn btn-danger" id="<%=items.item_id%>">Add to Cart</button>
+                        <% } %>
                     </div>
                 </div>
             <% } %>
