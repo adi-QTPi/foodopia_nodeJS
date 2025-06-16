@@ -59,47 +59,53 @@
 <body>
     <h1 class="text-center bg-glass sticky-top z-5 py-2">Menu Page</h1>
 
+    <!-- filter select -->
     <div class="d-flex w-60 mx-auto border-queen-pink rounded-4">
         <div class="flex-shrink-1 p-2 text-queen-pink fs-4 border-filter mx-1 caveat-cursive">Filters</div>
-        <div class="flex-grow d-flex justify-content-center gap-2 overflow-auto hide-scrollbar">
-            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
-            <button class="btn-filter m-1 px-3 rounded-2">hola</button>
-            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
-            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
-            <button class="btn-filter m-1 px-3 rounded-2">hola</button>
-            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
+        <div class="flex-grow d-flex justify-content-center gap-2 overflow-auto hide-scrollbar filter-buttons">
+            <% for(let category of to_menu_page.result2) { %>
+                <button class="btn-filter m-1 px-3 rounded-2" data-btn="<%=category.cat_id%>"><%=category.cat_name%></button>
+            <% } %>
         </div>
-        <div class="flex-shrink-1 p-2 text-queen-pink fs-4 border-filter border-filter-clear ms-auto mx-1 caveat-cursive">Clear</div>
+        <div class="clear-filter-button flex-shrink-1 p-2 text-queen-pink fs-4 border-filter border-filter-clear ms-auto mx-1 caveat-cursive">Clear</div>
     </div>
 
+    <!-- filtered -->
+    <div class="filtered-menu-space py-3 my-2">
 
-    <!-- <div>
-        <%= JSON.stringify(to_menu_page) %>
-    </div> -->
+    </div>
 
-
-    <table>
-        <% for( let categories of to_menu_page.result2) { %>
-            <th><%= categories.cat_name %></th>
+    <!-- ful menu -->
+    <div class="full-menu-space py-3 my-2">
+        <div class="fs-2 text-center">Complete Menu</div>
+        <div
+            class="d-flex flex-column flex-lg-row flex-wrap align-items-center justify-content-center m-1 m-md-4 gap-2 gap-md-4">
             <% for( let items of to_menu_page.result ) { %>
-                <% if (items.cat_id === categories.cat_id) { %>
-                    <tr>
-                        <td><%= items.item_name %></td>
-                        <td><%= items.sub_cat %></td>
-                        <td><%= items.cook_time_min %> minutes</td>
-                        <td>Rs. <%= items.price %></td>
-                        <td>
-                            <% if (to_menu_page.user.role === "customer") { %>
-                                <button class = "add-to-cart" id="<%= items.item_id %>">
-                                    add to cart
-                                </button>
-                            <% } %>
-                        </td>
-                    </tr>
-                <% } %>
+                <div class="card card-menu-page d-flex flex-row">
+                    <div class="card-body flex-grow">
+                        <div class="card-title fs-2">
+                            <%= items.item_name %>
+                        </div>
+                        <div class="card-subtitle text-muted">
+                            wait time : <span class="text-queen-pink">
+                                <%= items.cook_time_min %>
+                            </span> Minutes
+                        </div>
+                    </div>
+                    <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
+                        <div class="fs-3">₹<%= items.price %></div>
+                        <button class="add-to-cart btn btn-danger" id="<%=items.item_id%>">Add To Cart</button>
+                    </div>
+                </div>
             <% } %>
-        <% } %>
-    </table>
+        </div>
+    </div>
+
+    <!-- cart indicator -->
+    <div class="go-to-cart-space d-flex flex-row sticky-bottom col-12 col-lg-6 offset-lg-3 p-2 rounded-top-4 mt-2">
+        <div class="go-to-cart-space-text flex-grow-1 text-light fs-4 text-center">You have items in your cart !</div>
+        <button class="btn btn-dark to_cart_button flex-shrink-0 ">View Cart</button>
+    </div>
 
     <% if (to_menu_page.user.role === "admin") { %>
         <hr>
@@ -147,12 +153,5 @@
             <button type="submit">Submit</button>
         </form>
     <% } %>
-    <hr>
-    <button class="to_cart_button">To Cart</button>
-    <hr>
-    <form action="/api/user/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
-
 </body>
 </html>

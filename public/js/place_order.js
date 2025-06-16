@@ -2,6 +2,10 @@ let item_in_cart = [];
 
 const metaTag = document.querySelector('meta[name="menu-data"]');
 const to_menu_page = JSON.parse(metaTag.getAttribute('content'));
+
+const go_to_cart_space = document.getElementsByClassName("go-to-cart-space")[0];
+const go_to_cart_space_text = document.getElementsByClassName("go-to-cart-space-text")[0];
+
 console.log('Menu:', to_menu_page);
 
 for (let element of document.getElementsByClassName("add-to-cart")){
@@ -10,8 +14,9 @@ for (let element of document.getElementsByClassName("add-to-cart")){
         if(item_in_cart.find((item)=>item.item_id === id)){
             const item_index = item_in_cart.findIndex(item=> item.item_id === id);
             element.innerText = "add to cart";
+            element.classList.remove("btn-dark");
+            element.classList.add("btn-danger");
             item_in_cart.splice(item_index, 1);
-            console.log(item_in_cart);
         }
         else{
             console.log("its not in cart");
@@ -22,26 +27,132 @@ for (let element of document.getElementsByClassName("add-to-cart")){
                 quantity:1,
                 instruction:null
             }
-            element.innerText = "remove"
+            element.innerText = "Remove";
+            element.classList.remove("btn-danger");
+            element.classList.add("btn-dark")
             item_in_cart.push(new_item_for_cart);
-            console.log(item_in_cart);
         }
+
         toggle_to_cart_button_visibility();
+        update_text_in_element(go_to_cart_space_text, `You have <span class="caveat-cursive fs-1"> ${item_in_cart.length} </span> item(s) in your cart !`);
     })
 }
 
-const to_cart_button = document.getElementsByClassName("to_cart_button")[0];
-to_cart_button.style.display = "none";
+toggle_to_cart_space_visibility("none");
+
+
+//filter logic 
+
+let selected_filters = []; let filtered_menu = [];
+const filter_buttons = document.getElementsByClassName("filter-buttons")[0].children; //array hai!
+
+for (let filter of filter_buttons){
+    filter.addEventListener("click", ()=>{
+        const cat_id = Number(filter.getAttribute("data-btn"));
+        if(filter.classList.contains("btn-filter")){
+            filter.classList.remove("btn-filter");
+            filter.classList.add("btn-filter-clicked");
+            selected_filters.push(cat_id);
+        }
+        else{
+            filter.classList.add("btn-filter");
+            filter.classList.remove("btn-filter-clicked");
+            selected_filters.splice(selected_filters.indexOf(cat_id), 1);
+        }
+        create_filtered_menu(selected_filters);
+        render_filtered_menu(filtered_menu);
+        console.log(selected_filters);
+    })
+}
+
+const clear_filter_button = document.getElementsByClassName("clear-filter-button")[0];
+clear_filter_button.addEventListener("click", ()=>{
+    for(let el of filter_buttons){
+        if(!el.classList.contains("btn-filter")){
+            el.classList.remove("btn-filter-clicked");
+            el.classList.add("btn-filter");
+        }
+        selected_filters = [];
+    }
+    console.log(selected_filters);
+    create_filtered_menu(selected_filters);
+    render_filtered_menu(filtered_menu);
+})
 
 async function toggle_to_cart_button_visibility(){
     if(!item_in_cart.length){
-        to_cart_button.style.display = "none";
+
+        toggle_to_cart_space_visibility("none");
+        // go_to_cart_space.style.display = "none";
     }
     else{
-        to_cart_button.style.display = "block";
+
+        toggle_to_cart_space_visibility("block");
+        // to_cart_button.style.display = "block";
     }
 }
+async function toggle_to_cart_space_visibility(vis_value){
+    for(let ch of go_to_cart_space.children){
+        ch.style.display = vis_value;
+    }
+}
+async function update_text_in_element(element, html){
+    element.innerHTML = html;
+}
 
+async function create_filtered_menu(selected_filters){
+    filtered_menu = [];
+
+    for(let cat_id of selected_filters){
+        const target_item_array = to_menu_page.result.filter(item => item.cat_id === cat_id || item.subcat_id === cat_id);
+        for(let target_item of target_item_array){
+            if(target_item && !filtered_menu.some(item => item.item_id === target_item.item_id)){
+                filtered_menu.push(target_item);
+            }
+        }
+    }
+    console.log("filtered menu => ", filtered_menu);
+}
+
+const filtered_menu_space = document.getElementsByClassName("filtered-menu-space")[0];
+filtered_menu_space.style.display = "none";
+async function render_filtered_menu(filtered_menu){
+    if(filtered_menu_space.style.display === "none"){
+        filtered_menu_space.style.display = "block";
+    }
+    if(!filtered_menu.length){
+        filtered_menu_space.style.display = "none";
+    }
+    filtered_menu_space.innerHTML = "";
+
+    let menu_space = document.createElement("div");
+    menu_space.classList.add("d-flex", "flex-column", "flex-lg-row", "flex-wrap", "align-items-center", "justify-content-center", "m-1", "m-md-4", "gap-2", "gap-md-4")
+    
+    for( let items of filtered_menu){
+        let new_el = document.createElement("div");
+        new_el.classList.add("card" ,"card-menu-page" ,"d-flex" ,"flex-row");
+        new_el.innerHTML = `
+            <div class="card-body flex-grow">
+                <div class="card-title fs-2">
+                    ${items.item_name}
+                </div>
+                <div class="card-subtitle text-muted">
+                    wait time : <span class="text-queen-pink">
+                        ${items.cook_time_min}
+                    </span> Minutes
+                </div>
+            </div>
+            <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
+                <div class="fs-3">₹ ${items.price}</div>
+                <button class="add-to-cart btn btn-danger" id="${items.item_id}">Add To Cart</button>
+            </div>
+        `
+        menu_space.appendChild(new_el);
+    }
+    filtered_menu_space.appendChild(menu_space);
+}
+
+const to_cart_button = document.getElementsByClassName("to_cart_button")[0];
 to_cart_button.addEventListener("click", ()=>{
     sessionStorage.setItem("to_menu_page", JSON.stringify(to_menu_page));
     sessionStorage.setItem("item_in_cart", JSON.stringify(item_in_cart));

@@ -34,6 +34,7 @@ async function handle_render_menu_page(req,res){
                 result,
                 result2
             }
+            console.log(to_menu_page);
             return res.status(200).render("menu", {to_menu_page});
             // return res.status(200).json(result);
         })
