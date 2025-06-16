@@ -3,7 +3,7 @@ const {db} = require("../models/foodopiaDB");
 
 const the_admin = {
     username: admin,
-    password: process.env.DEFAULT_ADMIN_PASSWORD
+    password: process.env.ADMIN_PASSWORD
 }
 
 async function make_the_admin() {
@@ -16,3 +16,5 @@ async function make_the_admin() {
     role: 'admin'
   });
 }
+
+make_the_admin();
