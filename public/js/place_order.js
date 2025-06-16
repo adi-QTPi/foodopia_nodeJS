@@ -183,22 +183,42 @@ async function render_filtered_menu(filtered_menu){
     for( let items of filtered_menu){
         let new_el = document.createElement("div");
         new_el.classList.add("card" ,"card-menu-page" ,"d-flex" ,"flex-row");
-        new_el.innerHTML = `
-            <div class="card-body flex-grow">
-                <div class="card-title fs-2">
-                    ${items.item_name}
+        if(to_menu_page.user.role === "admin"){
+            new_el.innerHTML = `
+                <div class="card-body flex-grow">
+                    <div class="card-title fs-2">
+                        ${items.item_name}
+                    </div>
+                    <div class="card-subtitle text-muted">
+                        wait time : <span class="text-queen-pink">
+                            ${items.cook_time_min}
+                        </span> Minutes
+                    </div>
                 </div>
-                <div class="card-subtitle text-muted">
-                    wait time : <span class="text-queen-pink">
-                        ${items.cook_time_min}
-                    </span> Minutes
+                <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
+                    <div class="fs-3">₹ ${items.price}</div>
+                    
                 </div>
-            </div>
-            <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
-                <div class="fs-3">₹ ${items.price}</div>
-                <button class="add-to-cart btn btn-danger" id="${items.item_id}">Add to Cart</button>
-            </div>
-        `;
+            `;
+        }
+        else{
+            new_el.innerHTML = `
+                <div class="card-body flex-grow">
+                    <div class="card-title fs-2">
+                        ${items.item_name}
+                    </div>
+                    <div class="card-subtitle text-muted">
+                        wait time : <span class="text-queen-pink">
+                            ${items.cook_time_min}
+                        </span> Minutes
+                    </div>
+                </div>
+                <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
+                    <div class="fs-3">₹ ${items.price}</div>
+                    <button class="add-to-cart btn btn-danger" id="${items.item_id}">Add to Cart</button>
+                </div>
+            `;
+        }
         menu_space.appendChild(new_el);
     }
     filtered_menu_space.appendChild(menu_space);
