@@ -7,6 +7,8 @@ const {
 
 router  
     .route("/")
-    .post(handle_post_pay)
+    .post(
+        handle_post_pay
+    )
 
 module.exports = router;

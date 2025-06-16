@@ -26,9 +26,13 @@ const auth_restrict_to = (array_of_allowed_roles) =>{
             next();
         }
         else{
-            return res.status(403).json({
-                "msg":`${user_name} is NOT authorised to visit.`
-            })
+            req.session.to_error_page = {
+                error : `${user_name} is NOT Authorised to visit`
+            }
+            return res.status(403).redirect("/static/error");
+            // return res.status(403).json({
+            //     "msg":`${user_name} is NOT authorised to visit.`
+            // })
         }
     }
 }

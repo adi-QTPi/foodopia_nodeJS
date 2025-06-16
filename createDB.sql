@@ -34,8 +34,9 @@ CREATE TABLE item (
     price BIGINT NOT NULL,
     display_pic VARCHAR(500),
     cat_id BIGINT NOT NULL,
-    subcat ENUM('breakfast', 'lunch', 'dinner') NOT NULL,
-    FOREIGN KEY (cat_id) REFERENCES category(cat_id)
+    subcat_id BIGINT,
+    FOREIGN KEY (cat_id) REFERENCES category(cat_id),
+    FOREIGN KEY (subcat_id) REFERENCES category(cat_id)
 );
 
 -- Order table
@@ -76,5 +77,4 @@ CREATE TABLE paid_orders (
 CREATE INDEX idx_order_customer_id ON `order`(customer_id);
 CREATE INDEX idx_order_status ON `order`(status);
 CREATE INDEX idx_item_cat_id ON item(cat_id);
-CREATE INDEX idx_item_subcat ON item(subcat);
-CREATE INDEX idx_paid_orders_bill_no ON paid_orders(bill_no);
+CREATE INDEX idx_item_subcat_id ON item(subcat_id);

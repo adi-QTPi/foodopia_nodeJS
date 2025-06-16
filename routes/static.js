@@ -9,6 +9,7 @@ const {
     handle_render_cart_page,
     handle_render_orders_page,
     handle_render_order_by_id,
+    handle_render_error_page,
 } = require ("../controllers/static");
 
 const { 
@@ -54,6 +55,9 @@ router
         check_if_date_given,
         handle_render_orders_page
     )
+router  
+    .route("/error")
+    .get(handle_render_error_page)
 router  
     .route("/orders/:id")
     .get(

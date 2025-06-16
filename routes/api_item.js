@@ -21,7 +21,7 @@ router
     .post(
         auth_check_if_logged_in,
         auth_restrict_to(["admin"]),
-        check_for_entries_in_array(["item_name", "price", "cat_id", "subcat"]),
+        check_for_entries_in_array(["item_name", "price", "cat_id", "subcat_id"]),
         handle_post_item
     )
 

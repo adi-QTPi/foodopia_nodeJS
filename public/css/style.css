@@ -16,8 +16,68 @@
     "wdth" 100;
 }
 
+.vh-25{
+    height: 25vh;
+}
 .vh-50{
     height: 50vh;
+}
+
+.w-80{
+    width: 80%;
+}
+
+.w-60{
+    width: 60%;
+}
+
+.bg-queen-pink{
+    background-color: #cb3466; 
+    /* contrast color = #34CB99 */
+}
+.border-queen-pink{
+    border-style: solid;
+    border-color: #cb3466; 
+    border-width: 0.1rem;
+    /* contrast color = #34CB99 */
+}
+.border-filter{
+    border-right-style: solid;
+    border-color: #cb3466;
+    border-width: 0.1rem;
+    
+}
+.border-filter-clear{
+    border-right-style: none;    
+    border-left-style: solid;    
+}
+
+.btn-filter{
+    /* color: #34CB99; */
+    color: #cb3466;
+    background: none;
+    border: none;
+}
+
+.btn-filter-clicked{
+    /* color: #34CB99; */
+    /* color: #cb3466; */
+    color: white;
+    background: #34CB99;
+    border: none;
+}
+
+.text-queen-pink{
+    color: #cb3466;
+}
+
+.hide-scrollbar {
+ scrollbar-width: none;
+ -ms-overflow-style: none; 
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+ display: none;
 }
 
 .bg-image{
@@ -40,4 +100,25 @@
 
 .fs-large{
     font-size: xx-large;
+}
+
+.fs-3rem{
+    font-size: 3rem;
+}
+.fs-5rem{
+    font-size: 5rem;
+}
+.fs-6rem{
+    font-size: 6rem;
+}
+.fs-7rem{
+    font-size: 7rem;
+}
+
+.bg-glass{
+    backdrop-filter: blur(0.2rem);
+}
+
+.card-orders-page{
+    width:40vw;
 }

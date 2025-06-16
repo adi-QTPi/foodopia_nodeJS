@@ -11,13 +11,11 @@ async function fetch_order_data_by_id(req, res, next){
             ...req.session.to_order_by_id_page,
             order_data: result,
         }
-        console.log("db wala middleware ");
         next();
     });
 }
 
 async function check_if_date_given(req,res,next){
-    console.log(req.body);
     next();
 }
 
