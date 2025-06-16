@@ -11,11 +11,15 @@ async function handle_get_item(req, res){
 }
 
 async function handle_post_item(req, res){
-    const {item_name, cat_id, subcat, price, cook_time_min, display_pic } = req.body;
-    
-    let sql_query = `INSERT INTO item (item_name, cat_id, cook_time_min, price, display_pic, subcat) VALUES (?, ?, ?, ?, ?, ?);`;
+    let {item_name, cat_id, subcat_id, price, cook_time_min, display_pic } = req.body;
 
-    db.query(sql_query, [item_name, cat_id, cook_time_min, price, display_pic, subcat], (err, result, fields)=>{
+    if(cat_id === subcat_id){
+        subcat_id=null;
+    }
+    
+    let sql_query = `INSERT INTO item (item_name, cat_id, cook_time_min, price, display_pic, subcat_id) VALUES (?, ?, ?, ?, ?, ?);`;
+
+    db.query(sql_query, [item_name, cat_id, cook_time_min, price, display_pic, subcat_id], (err, result, fields)=>{
         if(err)return res.status(500).json(err);
         return res.status(200).redirect("/static/menu");
         // return res.status(200).json({

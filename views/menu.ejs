@@ -17,6 +17,7 @@
 
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
     <a class="navbar-brand mx-2 fs-2" href="/static/profile">Foodop1a</a>
+    <div class="fs-4 text-info caveat-cursive ">| <%= to_menu_page.user.user_name %></div>
 
     <span class="navbar-text position-absolute start-50 translate-middle-x">Your <span class="truculenta-normal fs-3">Cravings...</span> Our <span class="truculenta-normal fs-3">Responsibility</span></span>
 
@@ -38,12 +39,12 @@
             <% } %>
             <% if (to_menu_page.user.role === "customer") { %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/static/orders">Orders</a>
+                    <a class="nav-link" href="/static/orders">Your Orders</a>
                 </li>
             <% } %>
             <% if (to_menu_page.user.role === "cook") { %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/static/orders">Cook</a>
+                    <a class="nav-link" href="/static/cook">Cook</a>
                 </li>
             <% } %>
             <li class="nav-item">
@@ -56,15 +57,26 @@
 </nav>
 
 <body>
-    <h1>Menu Page</h1>
-    <hr>
-    <div>
-        <h3>Current User</h3>
-        <p>name -> <%= to_menu_page.user.name %></p>
-        <p>user_name -> <%= to_menu_page.user.user_name %></p>
-        <p>role -> <%= to_menu_page.user.role %></p>
+    <h1 class="text-center bg-glass sticky-top z-5 py-2">Menu Page</h1>
+
+    <div class="d-flex w-60 mx-auto border-queen-pink rounded-4">
+        <div class="flex-shrink-1 p-2 text-queen-pink fs-4 border-filter mx-1 caveat-cursive">Filters</div>
+        <div class="flex-grow d-flex justify-content-center gap-2 overflow-auto hide-scrollbar">
+            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
+            <button class="btn-filter m-1 px-3 rounded-2">hola</button>
+            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
+            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
+            <button class="btn-filter m-1 px-3 rounded-2">hola</button>
+            <button class="btn-filter-clicked m-1 px-3 rounded-2">hola</button>
+        </div>
+        <div class="flex-shrink-1 p-2 text-queen-pink fs-4 border-filter border-filter-clear ms-auto mx-1 caveat-cursive">Clear</div>
     </div>
-    <hr>
+
+
+    <!-- <div>
+        <%= JSON.stringify(to_menu_page) %>
+    </div> -->
+
 
     <table>
         <% for( let categories of to_menu_page.result2) { %>
@@ -107,12 +119,12 @@
                 <% } %>
             </select>
 
-            <label for="subcat">Sub-Category</label>
-            <select name="subcat" id="">
+            <label for="subcat_id">Sub-Category</label>
+            <select name="subcat_id" id="">
                 <option selected disabled></option>
-                <option value="breakfast">Breakfast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
+                <% for( let items of to_menu_page.result2) { %>
+                    <option value="<%= items.cat_id %>"><%= items.cat_name %></option>
+                <% } %>
             </select>
 
             <label for="cook_time_min">Cook Time :</label>

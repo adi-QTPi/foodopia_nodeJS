@@ -14,9 +14,10 @@ async function assign_table_for_new_order(req, res, next){
             db.query(sql_query, (err, result, fields)=>{
                 if(err)return res.status(500).json(err);
                 if(!result.length){
-                    return res.status(500).json({
-                        msg: "no empty table is there, order later"
-                    })
+                    req.session.to_error_page = {
+                        error : "no empty table is there, order later",
+                    }
+                    return res.status(200).redirect("/static/error");
                 }
                 console.log("find new empty table");
                 console.log(result[0].table_id);
