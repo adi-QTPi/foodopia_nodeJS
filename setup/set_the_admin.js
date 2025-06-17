@@ -12,10 +12,13 @@ async function make_the_admin() {
   const salt_rounds = 10;
   const hashedPassword = await bcrypt.hash(the_admin.password, salt_rounds);
 
-  await db.query(
-    "INSERT INTO user (user_name, name, pwd_hash, role) VALUES (?, ?, ?)",
-    [the_admin.username, the_admin.name,hashedPassword, 'admin']
-  );
+  let sql_query = "INSERT INTO user (user_name, name, pwd_hash, role) VALUES (?, ?, ?, ?)"
+  db.query(sql_query,[the_admin.username, the_admin.name,hashedPassword, 'admin'], (err,result,field)=>{
+    if(err){
+      console.log(err);
+    }
+    console.log("admin is added");
+  })
 }
 
 make_the_admin();
@@ -30,10 +33,14 @@ async function make_a_cook() {
   const salt_rounds = 10;
   const hashedPassword2 = await bcrypt.hash(def_cook.password, salt_rounds);
 
-  await db.query(
-    "INSERT INTO user (user_name,name, pwd_hash, role) VALUES (?, ?, ?)",
-    [def_cook.username,def_cook.name, hashedPassword2, 'cook']
-  );
+  let sql_query = "INSERT INTO user (user_name,name, pwd_hash, role) VALUES (?, ?, ?, ?)"
+
+  db.query(sql_query,[def_cook.username,def_cook.name, hashedPassword2, 'cook'], (err, result, fields)=>{
+    if(err){
+      console.log(err);
+    }
+    console.log("cook is added");
+  } )
 }
 
 make_a_cook();
