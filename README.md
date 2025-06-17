@@ -13,7 +13,7 @@
 4. Set the admin user:
 
    ```bash
-   node script/set_the_admin.js
+   node setup/set_the_admin.js
    ```
 
 5. Et voilà! You are good to go.
