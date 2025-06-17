@@ -7,6 +7,11 @@ async function handle_render_admin_page(req, res){
         ...to_admin_page,
         x_user : x_user,
     }
+    if(!to_admin_page.page_date){
+        to_admin_page = {
+            ...to_admin_page,
+        }
+    }
     req.session.to_admin_page = null;
 
     console.log(to_admin_page)
