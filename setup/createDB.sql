@@ -1,7 +1,7 @@
 -- Create database
-CREATE DATABASE foodopia_nodeJS;
+CREATE DATABASE foodopia;
 -- Use the database
-USE foodopia_nodeJS;
+USE foodopia;
 
 -- Category table (referenced by item table)
 CREATE TABLE category (

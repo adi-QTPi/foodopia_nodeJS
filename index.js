@@ -1,12 +1,11 @@
-const PORT = 9000;
 const express = require("express");
 const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const { db } = require("./models/foodopiaDB");
 const session = require("express-session");
-const flash = require("connect-flash");
 require("dotenv").config();
+const PORT = process.env.SERVER_PORT;
 const {SESSION_SECRET_KEY} = process.env;
 
 app.use(express.urlencoded());
