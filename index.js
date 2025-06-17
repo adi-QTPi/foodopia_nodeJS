@@ -51,6 +51,9 @@ app.use("/static/admin", static_admin_route_handler);
 const static_route_handler = require("./routes/static");
 app.use("/static", static_route_handler);
 
+const default_route_handler = require("./routes/root_route");
+app.use(default_route_handler);
+
 app.listen(PORT, ()=>{
     console.log(`\nfoodopia server starts on port -> ${PORT}\n`);
 })
