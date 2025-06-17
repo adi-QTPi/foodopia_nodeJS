@@ -21,23 +21,31 @@ async function render_cart(item_in_cart){
     const cart_space = document.getElementsByClassName("cart_space")[0];
     cart_space.innerHTML = ``;
     for (let items of item_in_cart){
-        let new_el = document.createElement("tr");
-        new_el.classList.add("cart_item");
-        let sub_total=items.quantity * items.price;
+        let new_el = document.createElement("div");
+        new_el.classList.add("card", "d-flex", "flex-row");
+        let sub_total = items.quantity * items.price;
+
         new_el.innerHTML = `
-        <td class="item-name">${items.item_name}</td>
-        <td class="quantity">
-            <button type="button" class="qty-btn minus-btn" data-item-id="${items.item_id}">-</button>
-            <span class="qty-display">${items.quantity}</span>
-            <button type="button" class="qty-btn plus-btn" data-item-id="${items.item_id}">+</button>
-        </td>
-        <td class="subtotal">${sub_total}</td>
-        <td class="instruction">
-            <input type="text" class="item_instruction_input" data-item-id="${items.item_id}">
-        </td>
-        <td class="quantity">
-            <button type="button" class="delete-btn">Delete</button>
-        </td>
+            <div class="card-body flex-grow">
+                <div class="card-title fs-2">
+                    ${items.item_name}
+                </div>
+                <div class="card-subtitle text-muted form-floating">
+                    <input type="text" class="form-control item_instruction_input" data-item-id="${items.item_id}" placeholder="abc" id="instruction">
+                    <label for="instruction">Instruction for the Chef</label>
+                </div>
+            </div>
+            <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
+                <div class="fs-3 sub_total">₹${sub_total}</div>
+                <div>
+                    <button type="button" class="btn btn-dark qty-btn minus-btn" data-item-id="${items.item_id}">-</button>
+                    <span class="qty-display fs-2">${items.quantity}</span>
+                    <button type="button" class="btn btn-dark qty-btn plus-btn" data-item-id="${items.item_id}">+</button>
+                </div>
+            </div>
+            <div class="flex-shrink-1 d-flex align-items-center justify-content-center mx-1">
+                <button type="button" class="delete-btn btn btn-danger">Delete</button>
+            </div>
         `;
         cart_space.appendChild(new_el);
 
@@ -45,24 +53,24 @@ async function render_cart(item_in_cart){
         const plus_button = new_el.querySelector(".plus-btn");
         const delete_button = new_el.querySelector(".delete-btn");
         const quantity_space = new_el.getElementsByClassName("qty-display")[0];
-        const subtotal_space = new_el.getElementsByClassName("subtotal")[0];
+        const subtotal_space = new_el.getElementsByClassName("sub_total")[0];
 
         minus_button.addEventListener("click", () => {
             if (items.quantity > 1){
                 items.quantity--;
                 quantity_space.innerText = items.quantity; 
-                subtotal_space.innerText = items.quantity * items.price;
+                subtotal_space.innerText = `₹${items.quantity * items.price}`;
             }
             else {
                 quantity_space.innerText = items.quantity;
-                subtotal_space.innerText = items.quantity * items.price;
+                subtotal_space.innerText = `₹${items.quantity * items.price}`;
             }
         });
         
         plus_button.addEventListener("click", () => {
             items.quantity++;
             quantity_space.innerText = items.quantity;
-            subtotal_space.innerText = items.quantity * items.price;
+            subtotal_space.innerText = `₹${items.quantity * items.price}`;
         });
 
         delete_button.addEventListener("click", ()=>{

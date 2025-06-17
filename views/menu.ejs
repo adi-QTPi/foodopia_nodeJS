@@ -99,57 +99,74 @@
         </div>
     </div>
 
-    <!-- cart indicator -->
-    <div class="go-to-cart-space d-flex flex-row sticky-bottom col-12 col-lg-6 offset-lg-3 p-2 rounded-top-4 mt-2">
+    <div class="go-to-cart-space d-flex flex-row align-items-center sticky-bottom col-12 col-lg-6 offset-lg-3 p-2 rounded-top-4 mt-2">
         <div class="go-to-cart-space-text flex-grow-1 text-light fs-4 text-center">You have items in your cart !</div>
-        <button class="btn btn-dark to_cart_button flex-shrink-0 ">View Cart</button>
+        <form action="/static/cart" method="get" class="">
+            <button type="submit" class="btn btn-dark to_cart_button">View Cart</button>
+        </form>
     </div>
 
     <% if (to_menu_page.user.role === "admin") { %>
         <hr>
-        <h3>Add item to the menu</h3>
-        <form action="/api/item" method ="post">
-            <label for="item_name">Item Name</label>
-            <input type="text" name="item_name">
+        <h3 class="text-center">Add item to the menu</h3>
+        <form class="text-center mx-auto col-10 col-lg-6 d-flex flex-column gap-2 align-items-center" action="/api/item" method ="post">
+            <div class="form-floating col-12">
+                <input type="text" name="item_name" id="item_name" class="form-control">
+                <label for="item_name">Item Name</label>
+            </div>
 
-            <label for="price">Price</label>
-            <input type="text" name="price">
+            <div class="d-flex flex-row justify-content-center gap-3 col-12">
+                <div class="form-floating col-5">
+                    <select name="cat_id" id="cat_id" class="form-control">
+                        <option selected disabled></option>
+                        <% for( let items of to_menu_page.result2) { %>
+                            <option value="<%= items.cat_id %>"><%= items.cat_name %></option>
+                        <% } %>
+                    </select>
+                    <label for="cat_id">Category</label>
+                </div>
+                <div class="form-floating col-5">
+                    <select name="subcat_id" id="subcat_id" class="form-control">
+                        <option selected disabled></option>
+                        <% for( let items of to_menu_page.result2) { %>
+                            <option value="<%= items.cat_id %>"><%= items.cat_name %></option>
+                        <% } %>
+                    </select>
+                    <label for="subcat_id">Sub-Category</label>
+                </div>
+            </div>
 
-            <label for="cat_id">Category</label>
-            <select name="cat_id" id="">
-                <option selected disabled></option>
-                <% for( let items of to_menu_page.result2) { %>
-                    <option value="<%= items.cat_id %>"><%= items.cat_name %></option>
-                <% } %>
-            </select>
-
-            <label for="subcat_id">Sub-Category</label>
-            <select name="subcat_id" id="">
-                <option selected disabled></option>
-                <% for( let items of to_menu_page.result2) { %>
-                    <option value="<%= items.cat_id %>"><%= items.cat_name %></option>
-                <% } %>
-            </select>
-
-            <label for="cook_time_min">Cook Time :</label>
-            <input type="number" name="cook_time_min" min="0" max="120">
-            <span>minutes</span>
-            </br>
-            <button type="submit">Submit</button>
+            <div class="d-flex flex-row justify-content-center gap-3 col-10">
+                <div class="form-floating col-5">
+                    <input type="number" id="cook_time_min" name="cook_time_min" min="0" max="120" class="form-control">
+                    <label for="cook_time_min">Cook Time (minutes)</label>
+                </div>
+                <div class="form-floating col-5">
+                    <input type="text" name="price" id="price" class="form-control">
+                    <label for="price">Price</label>
+                </div>
+            </div>
+            <button class="btn btn-dark col-6" type="submit">Submit</button>
         </form>
 
         <hr>
-        <h3>Add Category to the menu</h3>
-        <form action="/api/cat" method ="post">
-            <label for="cat_name">Category Name</label>
-            <input type="text" name="cat_name">
 
-            <label for="cat_description">Category Description</label>
-            <input type="text" name="cat_description">
-
-            </br>
-            <button type="submit">Submit</button>
+        <h3 class="text-center">Add Category to the menu</h3>
+        <form action="/api/cat" method ="post" class="mx-auto col-10 col-lg-6 d-flex flex-column align-items-center gap-2">
+            <div class="container d-flex flex-row gap-2 justify-content-center">
+                <div class="form-floating col-5">
+                    <input id="cat_name" class="form-control" type="text" name="cat_name">
+                    <label for="cat_name">Category Name</label>
+                </div>
+                <div class="form-floating col-5">
+                    <input  class="form-control" type="text" id="cat_description" name="cat_description">
+                    <label for="cat_description">Category Description</label>
+                </div>
+            </div>
+            <button class="btn btn-dark col-6" type="submit">Submit</button>
         </form>
+    <hr>
+    <footer class="intent-blank"></footer>
     <% } %>
 </body>
 </html>
