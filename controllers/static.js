@@ -42,7 +42,10 @@ async function handle_render_menu_page(req,res){
 }
 
 async function handle_render_cart_page(req,res){
-    res.render("cart");
+    to_cart_page = {
+        x_user : req.x_user,
+    }
+    res.render("cart", { to_cart_page });
 }
 
 async function handle_render_orders_page(req, res){

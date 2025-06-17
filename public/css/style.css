@@ -148,6 +148,9 @@
     border: solid 0.2rem white;
 }
 .to_cart_button{
-    /* color: #cb3466;
-    background-color: white; */
+   
+}
+
+.intent-blank{
+    height: 10rem;
 }
