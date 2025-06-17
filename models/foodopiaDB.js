@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password: "127west26",
+    password: process.env.MYSQL_PASSWORD,
     multipleStatements:true,
     database: "foodopia_nodeJS",
 }) 
