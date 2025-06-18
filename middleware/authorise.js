@@ -37,7 +37,17 @@ const auth_restrict_to = (array_of_allowed_roles) =>{
     }
 }
 
+async function auth_just_check_if_logged_in(req, res,next){
+    const obtained_token = req.cookies.token;
+    if(obtained_token){
+        const curr_user = jwt.verify(obtained_token, JWT_SECRET);
+        req.x_user = curr_user;
+    }
+    next();
+}
+
 module.exports = {
     auth_check_if_logged_in,
     auth_restrict_to,
+    auth_just_check_if_logged_in,
 }

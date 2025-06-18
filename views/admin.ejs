@@ -33,6 +33,11 @@
                     <a class="nav-link" href="/static/admin">Manage Orders</a>
                 </li>
             <% } %>
+            <% if (to_admin_page.x_user.role === "admin") { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/admin/create_new">New Account</a>
+                </li>
+            <% } %>
             <% if (to_admin_page.x_user.role === "customer") { %>
                 <li class="nav-item">
                     <a class="nav-link" href="/static/orders">Your Orders</a>

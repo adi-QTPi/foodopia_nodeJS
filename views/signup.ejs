@@ -11,17 +11,36 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <% 
+    let role;
+    if(to_signup_page && to_signup_page.x_user.role){
+        role = to_signup_page.x_user.role;
+    } 
+    %>
     <div class="container min-vh-100 d-flex align-items-center">
         <div class="row w-100 justify-content-center">
             <div class="col-8 col-lg-4">
-                <h1 class="text-center">Signup</h1>
+                <% if (role && role === "admin") { %>
+
+                    <h1 class="text-center fs-2">! Admin Exclusive !</h1>
+                    <h1 class="text-center">Create New User</h1>
+                <% } else { %>
+                    <h1 class="text-center">Signup</h1>
+                <% } %>
                 <% if (to_signup_page && to_signup_page.error) { %>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Error!</strong> <%= to_signup_page.error %>
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 <% } %>
-                <form class="text-center" method="post" action="/api/user/signup">
+                <form class="text-center" method="post"
+                <% if (role && role === "admin") { %>
+                 action = "/api/admin/create_new"
+                <% } else { %>
+                    action="/api/user/signup"
+                <% } %> 
+                >
                     <div class="form-floating mb-3">
                         <input type="text" name="user_name" placeholder="abc" autofocus class="form-control" id = "user_name">
                         <label for="user_name">Username</label>
@@ -34,7 +53,17 @@
                         <input type="password" id="password" name="password" placeholder="abc" class="form-control">
                         <label for="password">Enter Password</label>
                     </div>
-                    <input type="hidden" name="role" value="customer">
+                    <% if (role && role === "admin") { %>
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-select mb-3" id="role" name="role">
+                            <option selected disabled>Choose a Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="cook">Cook</option>
+                            <option value="customer">Customer</option>
+                        </select>
+                    <% } else { %> 
+                       <input type="hidden" id="role" name="role" value="customer">
+                    <% } %>
                     <button class="btn btn-dark w-50" type="submit">Submit</button>
                 </form>
                 <div class="mt-3 text-center">

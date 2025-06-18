@@ -14,7 +14,8 @@ const {
 
 const { 
     auth_check_if_logged_in, 
-    auth_restrict_to
+    auth_restrict_to,
+    auth_just_check_if_logged_in
 } = require("../middleware/authorise");
 
 const { 
@@ -29,6 +30,7 @@ router
 router
     .route("/signup")
     .get(
+        auth_just_check_if_logged_in,
         handle_render_signup_page
     )
 

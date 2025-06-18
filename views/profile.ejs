@@ -42,6 +42,11 @@
                     <a class="nav-link" href="/static/cook">Cook</a>
                 </li>
             <% } %>
+            <% if (curr_user.role === "admin") { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/admin/create_new">New Account</a>
+                </li>
+            <% } %>
             <li class="nav-item">
                 <form action="/api/user/logout" method="post">
                     <button class="btn btn-dark" type="submit">Logout</button>
@@ -82,6 +87,11 @@
                 <% if (curr_user.role === "admin") { %>
                 <a href="/static/admin" class="btn btn-dark fs-2">
                     Manage Orders
+                </a>
+                <% } %>
+                <% if (curr_user.role === "admin") { %>
+                <a href="/static/admin/create_new" class="btn btn-dark fs-2">
+                    Create New Account
                 </a>
                 <% } %>
                 <% if (curr_user.role === "customer") { %>
