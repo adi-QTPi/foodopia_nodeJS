@@ -6,7 +6,7 @@ const db = mysql.createConnection({
     user:"root",
     password: process.env.MYSQL_PASSWORD,
     multipleStatements:true,
-    database: process.env.DB_NAME,
+    database: "foodopia",
 }) 
 
 db.connect((err)=>{

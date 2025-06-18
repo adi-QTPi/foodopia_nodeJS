@@ -180,10 +180,13 @@ async function render_filtered_menu(filtered_menu){
     let menu_space = document.createElement("div");
     menu_space.classList.add("d-flex", "flex-column", "flex-lg-row", "flex-wrap", "align-items-center", "justify-content-center", "m-1", "m-md-4", "gap-2", "gap-md-4")
     
-    for( let items of filtered_menu){
+    let reverse_filtered_menu = [...filtered_menu].reverse();
+
+
+    for( let items of reverse_filtered_menu){
         let new_el = document.createElement("div");
         new_el.classList.add("card" ,"card-menu-page" ,"d-flex" ,"flex-row");
-        if(to_menu_page.user.role === "admin"){
+        if(to_menu_page.user.role === "admin" || to_menu_page.user.role === "cook"){
             new_el.innerHTML = `
                 <div class="card-body flex-grow">
                     <div class="card-title fs-2">
