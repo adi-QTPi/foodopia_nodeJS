@@ -185,7 +185,7 @@ async function render_filtered_menu(filtered_menu){
 
     for( let items of reverse_filtered_menu){
         let new_el = document.createElement("div");
-        new_el.classList.add("card" ,"card-menu-page" ,"d-flex" ,"flex-row");
+        new_el.classList.add("card" ,"col-10", "col-lg-5" ,"d-flex" ,"flex-row");
         if(to_menu_page.user.role === "admin" || to_menu_page.user.role === "cook"){
             new_el.innerHTML = `
                 <div class="card-body flex-grow">
@@ -196,6 +196,14 @@ async function render_filtered_menu(filtered_menu){
                         wait time : <span class="text-queen-pink">
                             ${items.cook_time_min}
                         </span> Minutes
+                    </div>
+                    <div class="d-flex flex-row col-10">
+                        <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                            ${items.cat_name}
+                        </div>
+                        <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                            ${items.subcat_name}
+                        </div>
                     </div>
                 </div>
                 <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
@@ -214,6 +222,14 @@ async function render_filtered_menu(filtered_menu){
                         wait time : <span class="text-queen-pink">
                             ${items.cook_time_min}
                         </span> Minutes
+                    </div>
+                    <div class="d-flex flex-row col-10">
+                        <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                            ${items.cat_name}
+                        </div>
+                        <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                            ${items.subcat_name}
+                        </div>
                     </div>
                 </div>
                 <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">

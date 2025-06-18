@@ -65,11 +65,12 @@
     <h1 class="text-center bg-glass sticky-top z-5 py-2">Menu Page</h1>
 
     <!-- filter select -->
-    <div class="d-flex w-60 mx-auto border-queen-pink rounded-4">
+    <div class="d-flex col-11 col-lg-8 mx-auto border-queen-pink rounded-4">
         <div class="flex-shrink-1 p-2 text-queen-pink fs-4 border-filter mx-1 caveat-cursive">Filters</div>
-        <div class="flex-grow d-flex justify-content-center gap-2 overflow-auto hide-scrollbar filter-buttons">
+        <div class=" d-flex  overflow-auto hide-scrollbar filter-buttons">
+            <!-- <div class="col-12"></div> -->
             <% for(let category of to_menu_page.result2) { %>
-                <button class="btn-filter m-1 px-3 rounded-2" data-btn="<%=category.cat_id%>"><%=category.cat_name%></button>
+                <button class="btn-filter rounded-2 m-2 col-auto" data-btn="<%=category.cat_id%>"><%=category.cat_name%></button>
             <% } %>
         </div>
         <div class="clear-filter-button flex-shrink-1 p-2 text-queen-pink fs-4 border-filter border-filter-clear ms-auto mx-1 caveat-cursive">Clear</div>
@@ -82,7 +83,7 @@
         <div
             class="d-flex flex-column flex-lg-row flex-wrap align-items-center justify-content-center m-1 m-md-4 gap-2 gap-md-4">
             <% for( let items of to_menu_page.result ) { %>
-                <div class="card card-menu-page d-flex flex-row">
+                <div class="card col-10 col-lg-5 d-flex flex-row">
                     <div class="card-body flex-grow">
                         <div class="card-title fs-2">
                             <%= items.item_name %>
@@ -91,6 +92,14 @@
                             wait time : <span class="text-queen-pink">
                                 <%= items.cook_time_min %>
                             </span> Minutes
+                        </div>
+                        <div class="d-flex flex-row col-10">
+                            <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                                <%= items.cat_name %>
+                            </div>
+                            <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                                <%= items.subcat_name %>
+                            </div>
                         </div>
                     </div>
                     <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
