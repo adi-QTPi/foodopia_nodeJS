@@ -14,7 +14,14 @@ async function handle_render_profile_page(req,res){
 }
 
 async function handle_render_signup_page(req,res){
-    const to_signup_page = req.session.to_signup_page;
+    let to_signup_page = req.session.to_signup_page;
+    if(req.x_user){
+        to_signup_page = {
+            ...to_signup_page,
+            x_user:req.x_user
+        }
+    }
+
     req.session.to_signup_page = null;
     res.render("signup", {to_signup_page});
 }

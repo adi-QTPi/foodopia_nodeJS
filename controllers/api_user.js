@@ -36,11 +36,26 @@ async function handle_delete_user_by_id(req, res){
     })
 }
 
-async function handle_post_create_new_user(req,res){
+async function admin_handle_post_create_new_user(req,res){
     const {user_name, name, role, pwd_hash} = req.body;
 
     let sql_query = `INSERT INTO user (user_name, name, pwd_hash, role) VALUES (?,?,?,?)`;
     db.execute(sql_query, [user_name, name, pwd_hash, role], (err,result, fields)=>{
+        if(err){
+            return res.status(500).send(err);
+        }
+        // req.session.to_login_page = {
+        //     message:"New User created ! login to continue"
+        // }
+        return res.redirect("/static/profile");
+    })
+}
+
+async function handle_post_create_new_user(req,res){
+    const {user_name, name, role, pwd_hash} = req.body;
+
+    let sql_query = `INSERT INTO user (user_name, name, pwd_hash, role) VALUES (?,?,?,?)`;
+    db.execute(sql_query, [user_name, name, pwd_hash, "customer"], (err,result, fields)=>{
         if(err){
             return res.status(500).send(err);
         }
@@ -67,4 +82,5 @@ module.exports ={
     handle_delete_user_by_id,
     handle_post_create_new_user,
     handle_post_user_logout,
+    admin_handle_post_create_new_user
 }

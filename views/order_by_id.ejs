@@ -43,6 +43,11 @@
                     <a class="nav-link" href="/static/cook">Cook</a>
                 </li>
             <% } %>
+            <% if (to_order_by_id_page.x_user.role === "admin") { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/admin/create_new">New Account</a>
+                </li>
+            <% } %>
             <li class="nav-item">
                 <form action="/api/user/logout" method="post">
                     <button class="btn btn-dark" type="submit">Logout</button>
