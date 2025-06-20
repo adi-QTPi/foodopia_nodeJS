@@ -56,8 +56,21 @@ async function check_password_confirmation(req, res, next){
     }
 }
 
+async function check_password_strength(req, res, next){
+    const {password} = req.body;
+    console.log("check password strength ", password);
+    if(password.length < 8){
+        req.session.to_signup_page = {
+            error : "Password must be atleast 8 Characters long"
+        }
+        return res.status(400).redirect("../../static/signup");
+    }
+    next();
+}
+
 module.exports = {
     check_password_confirmation,
     check_new_user_detail_entry_signup,
     hash_password,
+    check_password_strength,
 }
