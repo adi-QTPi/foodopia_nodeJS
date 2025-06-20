@@ -43,7 +43,21 @@ async function hash_password (req, res, next){
     });
 }
 
+async function check_password_confirmation(req, res, next){
+    const {password, d_password} = req.body;
+    if(password === d_password){
+        next();
+    }
+    else{
+        req.session.to_signup_page = {
+            error:"the passwords don't match"
+        }
+        res.status(400).redirect("../../static/signup");
+    }
+}
+
 module.exports = {
+    check_password_confirmation,
     check_new_user_detail_entry_signup,
-    hash_password
+    hash_password,
 }

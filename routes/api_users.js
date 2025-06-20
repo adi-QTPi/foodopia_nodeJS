@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { 
+    check_password_confirmation,
     check_new_user_detail_entry_signup, 
     hash_password,
 } = require("../middleware/api_user");
@@ -39,7 +40,12 @@ router
     
 router
     .route("/signup")
-    .post(check_new_user_detail_entry_signup,hash_password,handle_post_create_new_user)
+    .post(
+        check_new_user_detail_entry_signup,
+        check_password_confirmation,
+        hash_password,
+        handle_post_create_new_user
+    )
 
 router.use(auth_check_if_logged_in);
 router

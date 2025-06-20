@@ -21,6 +21,8 @@ async function handle_render_signup_page(req,res){
             x_user:req.x_user
         }
     }
+    console.log("handle render signup page req session",req.session.to_signup_page);
+    console.log("handle render signup page", to_signup_page);
 
     req.session.to_signup_page = null;
     res.render("signup", {to_signup_page});
