@@ -32,7 +32,25 @@ async function handle_post_item(req, res){
     })
 }
 
+async function handle_post_delete_item(req,res){
+    const {item_id} = req.body;
+    let sql_query = "UPDATE item SET is_available = 0 WHERE item_id = ?;"
+    db.query(sql_query, [item_id], (err, result, fields)=>{
+        if(err){
+            req.session.to_error_page = {
+                error: JSON.stringify(err)
+            }
+            return res.redirect("/static/error");
+        }
+        req.session.to_menu_page = {
+            message:"Item Deleted Successfully !"
+        }
+        return res.status(200).redirect("/static/menu");
+    })
+}
+
 module.exports = {
     handle_get_item,
     handle_post_item,
+    handle_post_delete_item
 }

@@ -24,7 +24,7 @@ async function handle_render_signup_page(req,res){
 }
 
 async function handle_render_menu_page(req,res){
-    let sql_query = "SELECT i.item_id, i.item_name, i.cook_time_min, i.price, i.display_pic, i.cat_id, c.cat_name AS cat_name, i.subcat_id, cd.cat_name AS subcat_name FROM item i JOIN category c ON i.cat_id = c.cat_id LEFT JOIN category cd ON i.subcat_id = cd.cat_id ORDER BY i.item_id;"
+    let sql_query = "SELECT i.item_id, i.item_name, i.cook_time_min, i.price, i.display_pic, i.cat_id, c.cat_name AS cat_name, i.subcat_id, cd.cat_name AS subcat_name FROM item i JOIN category c ON i.cat_id = c.cat_id LEFT JOIN category cd ON i.subcat_id = cd.cat_id WHERE i.is_available = 1 ORDER BY RAND();"
 
     db.query(sql_query, (err, result, fields)=>{
         if(err)return res.status(500).json(err);

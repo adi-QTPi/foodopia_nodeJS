@@ -176,7 +176,10 @@ async function render_filtered_menu(filtered_menu){
                 </div>
                 <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
                     <div class="fs-3">₹ ${items.price}</div>
-                    
+                    <form action="/api/item/delete"  method="post">
+                        <input type="hidden" name="item_id" value="${items.item_id}">
+                        <button type="submit" class="btn btn-danger">Delete Item</button>
+                    </form>
                 </div>
             `;
         }

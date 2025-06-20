@@ -36,6 +36,7 @@ CREATE TABLE item (
     display_pic VARCHAR(500),
     cat_id BIGINT NOT NULL,
     subcat_id BIGINT,
+    is_available BOOLEAN DEFAULT 1,
     FOREIGN KEY (cat_id) REFERENCES category(cat_id),
     FOREIGN KEY (subcat_id) REFERENCES category(cat_id)
 );
