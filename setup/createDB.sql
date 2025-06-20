@@ -1,4 +1,5 @@
 -- Create database
+DROP DATABASE IF EXISTS foodopia;
 CREATE DATABASE foodopia;
 -- Use the database
 USE foodopia;
