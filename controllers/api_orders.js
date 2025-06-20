@@ -2,9 +2,6 @@ const {db} = require("../models/foodopiaDB");
 
 async function handle_post_orders(req, res){
     const curr_user_id = req.x_user.user_id;
-    console.log(req.body);
-    console.log("user_id -> ",req.x_user.user_id);
-
     let total_price = 0;
     for(let items of req.body){
         total_price += items.price * items.quantity;
@@ -13,7 +10,6 @@ async function handle_post_orders(req, res){
     const table_id = req.session.table_id;
     const now = new Date();
     const order_at = now.toString();
-    console.log("table_id -> ",table_id, "order_at -> ", order_at);
 
     sql_query = "INSERT INTO `order` (order_at, table_no, customer_id, status, total_price) VALUES (?, ?, ?, ?, ?);";
 
@@ -35,7 +31,6 @@ async function handle_post_orders(req, res){
                 if(err){
                     return res.status(500).json(err);
                 }
-                console.log("item id ", item.item_id, "added");
             });
         }
 
@@ -52,7 +47,6 @@ async function handle_post_orders(req, res){
 }
 
 async function set_date_to_show_orders(req,res){
-    console.log(req.body);
     req.session.date_to_fetch_order_for = req.body.date_to_fetch_order_for;
     res.status(200).redirect("/static/orders");
 }

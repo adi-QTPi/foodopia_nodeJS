@@ -5,7 +5,6 @@ async function handle_get_item(req, res){
 
     db.query(sql_query, (err, result, fields)=>{
         if(err)return res.status(500).json(err);
-        console.log("handle_get_item reached");
         return res.status(200).json(result);
     })
 }

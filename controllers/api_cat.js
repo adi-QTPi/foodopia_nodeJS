@@ -5,7 +5,6 @@ async function handle_get_category(req, res){
 
     db.query(sql_query, (err,result,fields)=>{
         if(err)return res.status(500).json(err);
-        console.log("get_category reached");
         return res.json(result);
     })
 }

@@ -19,7 +19,6 @@ const auth_restrict_to = (array_of_allowed_roles) =>{
     return async (req,res,next) => {
         const { user_name, role } = req.x_user;
         if (array_of_allowed_roles.includes(role)){
-            console.log(`${user_name} is authorized...`)
             next();
         }
         else{

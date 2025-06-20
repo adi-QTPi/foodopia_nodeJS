@@ -1,8 +1,6 @@
 const {db} = require("../models/foodopiaDB");
 
 async function handle_render_login_page(req, res){
-    // const error = req.flash("error");
-    // const error = req.session.error;
     const to_login_page = req.session.to_login_page
     req.session.to_login_page = null;
     return res.render("login", {to_login_page});
@@ -21,9 +19,6 @@ async function handle_render_signup_page(req,res){
             x_user:req.x_user
         }
     }
-    console.log("handle render signup page req session",req.session.to_signup_page);
-    console.log("handle render signup page", to_signup_page);
-
     req.session.to_signup_page = null;
     res.render("signup", {to_signup_page});
 }
@@ -50,7 +45,6 @@ async function handle_render_menu_page(req,res){
                 }
             }
             req.session.to_menu_page = null;
-            console.log(to_menu_page);
             return res.status(200).render("menu", {to_menu_page});
         })
     })
@@ -72,7 +66,7 @@ async function handle_render_orders_page(req, res){
     if(req.session.date_to_fetch_order_for){
         date_in_query = req.session.date_to_fetch_order_for;
         sql_query = "SELECT order_id, table_no, order_at, status, total_price FROM `order` WHERE customer_id = ? AND DATE(order_at) = ? ORDER BY order_at DESC;"
-        req.session.date_to_fetch_order_for = null; //present date by refresh
+        req.session.date_to_fetch_order_for = null;
     }
     else{
         date_in_query = [];
@@ -110,7 +104,6 @@ async function handle_render_order_by_id(req, res){
         ...req.session.to_order_by_id_page,
         x_user:req.x_user,
     }
-    console.log(to_order_by_id_page);
     res.status(200).render("order_by_id", { to_order_by_id_page });
 }   
 
