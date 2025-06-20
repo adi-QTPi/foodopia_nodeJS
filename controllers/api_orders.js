@@ -11,13 +11,10 @@ async function handle_post_orders(req, res){
     }
 
     const table_id = req.session.table_id;
-    // req.session.table_id = null;
-    // const table_id = 1;
     const now = new Date();
     const order_at = now.toString();
     console.log("table_id -> ",table_id, "order_at -> ", order_at);
 
-    //UPDATE `table` SET is_empty = 0 WHERE table_id = ?; 
     sql_query = "INSERT INTO `order` (order_at, table_no, customer_id, status, total_price) VALUES (?, ?, ?, ?, ?);";
 
     db.query(sql_query, [now, table_id, curr_user_id, "received", total_price], (err, result, fields)=>{

@@ -122,12 +122,8 @@ cart_form.addEventListener("submit", (e)=>{
     })
     .then((response) => response.json())
     .then((data)=>{
-        // alert("New order placed !");
-        // setTimeout(()=>{
-        // },2000);
         console.log(data);
         window.location.href="/static/orders"
     })
-    // .then((json) => console.log(json))
     .catch((err)=>console.log("error:", err));
 })
