@@ -6,8 +6,8 @@ const {
 } = require("../controllers/api_admin");
 
 const { 
-    check_new_user_detail_entry_signup, 
     hash_password,
+    check_password_confirmation,
 } = require("../middleware/api_user");
 
 const {
@@ -25,7 +25,9 @@ router
 router
     .route("/create_new")
     .post(
-        check_for_entries_in_array(["user_name", "name", "password", "role"]),
+
+        check_for_entries_in_array(["user_name", "name", "password", "d_password", "role"]),
+        check_password_confirmation,
         hash_password,
         admin_handle_post_create_new_user
     )
