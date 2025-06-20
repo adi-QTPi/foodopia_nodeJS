@@ -13,8 +13,6 @@ async function handle_render_admin_page(req, res){
         }
     }
     req.session.to_admin_page = null;
-
-    console.log(to_admin_page)
     res.status(200).render("admin", {to_admin_page});
 }
 

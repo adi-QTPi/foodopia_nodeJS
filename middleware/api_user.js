@@ -6,7 +6,6 @@ async function check_new_user_detail_entry_signup(req, res, next){
     const { user_name, name, role, password } = req.body;
 
     if(!user_name || !name || !role || !password){
-        // return res.status(400).json({"msg":"enter all fields please"});
         req.session.to_signup_page = {
             error:"enter all fields properly",
         };
@@ -21,7 +20,6 @@ async function check_new_user_detail_entry_signup(req, res, next){
             next();
         }
         else{
-            // res.status(400).json({"msg":"the username is taken... choose another username."})
             req.session.to_signup_page = {
                 error:"the username is taken... choose another username."
             };
@@ -36,7 +34,6 @@ async function hash_password (req, res, next){
     bcrypt.genSalt(salt_round, (err, salt) => {
         if(err)throw(err);
         bcrypt.hash(password, salt, function(err, hash) {
-            console.log(hash);
             req.body.pwd_hash = hash;
             next();
         });
@@ -58,7 +55,6 @@ async function check_password_confirmation(req, res, next){
 
 async function check_password_strength(req, res, next){
     const {password} = req.body;
-    console.log("check password strength ", password);
     if(password.length < 8){
         req.session.to_signup_page = {
             error : "Password must be atleast 8 Characters long"

@@ -6,7 +6,6 @@ async function handle_get_all_users(req, res){
         if(err){
             return res.status(500).send(err);
         }
-        if(!result[0])console.log("empty user table");
         return res.status(200).json(result);
     })
 }
@@ -64,7 +63,6 @@ async function handle_post_create_new_user(req,res){
 }
 
 async function handle_post_user_logout(req, res){
-    // req.cookies.token = null;
     const to_login_page = {
         message:"Successfully logged out."
     }
