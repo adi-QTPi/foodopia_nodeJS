@@ -5,7 +5,7 @@ const { JWT_SECRET } = process.env;
 async function handle_login_assign_jwt(req, res){
     const curr_user = req.header.x_user;
     const token = jwt.sign(curr_user, JWT_SECRET, {
-        // expiresIn: "24h"
+        expiresIn: "24h"
     });
 
     res.cookie("token", token, {
