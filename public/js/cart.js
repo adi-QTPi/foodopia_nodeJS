@@ -7,16 +7,6 @@ const item_in_cart = JSON.parse(sessionStorage.getItem("item_in_cart"));
 console.log(to_menu_page);
 console.log(item_in_cart);
 
-async function show_user_details(to_menu_page){
-    const curr_name = document.getElementsByClassName("curr_name")[0];
-    const curr_user_name = document.getElementsByClassName("curr_user_name")[0];
-    const curr_role = document.getElementsByClassName("curr_role")[0];
-
-    curr_name.innerText = `Name -> ${to_menu_page.user.name}`;
-    curr_user_name.innerText = `User Name -> ${to_menu_page.user.user_name}`;
-    curr_role.innerText = `Role -> ${to_menu_page.user.role}`;
-}
-
 async function render_cart(item_in_cart){
     const cart_space = document.getElementsByClassName("cart_space")[0];
     cart_space.innerHTML = ``;
