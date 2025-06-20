@@ -1,4 +1,6 @@
 const {db} = require("../models/foodopiaDB");
+const p_db = db.promise();
+const mysql = require('mysql2/promise');
 
 async function handle_post_orders(req, res){
     const curr_user_id = req.x_user.user_id;
@@ -11,39 +13,37 @@ async function handle_post_orders(req, res){
     const now = new Date();
     const order_at = now.toString();
 
-    sql_query = "INSERT INTO `order` (order_at, table_no, customer_id, status, total_price) VALUES (?, ?, ?, ?, ?);";
+    try{
+        await p_db.beginTransaction();
 
-    db.query(sql_query, [now, table_id, curr_user_id, "received", total_price], (err, result, fields)=>{
-        if(err){
-            return res.status(500).json({
-                msg:"second one",
-                err
-            });
-        }
+        let sql_query = "INSERT INTO `order` (order_at, table_no, customer_id, status, total_price) VALUES (?, ?, ?, ?, ?)";
+        const [result] = await p_db.execute(sql_query, [now, table_id, curr_user_id, "received", total_price]);
         const order_id = Number(result.insertId);
+
         const req_body = req.body;
-        sql_query = "INSERT INTO item_order (order_id, item_id, quantity, instruction) VALUES (?, ?, ?, ?);"
-        res.status(200).json({
-            msg:"order to ban gya deal done"
-        })
+
+        sql_query =  "INSERT INTO item_order (order_id, item_id, quantity, instruction) VALUES (?, ?, ?, ?);"
+
         for(let item of req_body){
-            db.query(sql_query, [order_id, item.item_id, item.quantity, item.instruction], (err,result,fields)=>{
-                if(err){
-                    return res.status(500).json(err);
-                }
-            });
+            await p_db.execute(sql_query, [order_id, item.item_id, item.quantity, item.instruction]);
         }
 
         sql_query = "UPDATE `table` SET is_empty = 0 WHERE table_id = ?";
-        db.query(sql_query, [table_id], (err,result, fields)=>{
-            if(err){
-                return res.status(500).json({
-                    msg:"last one",
-                    err
-                });
-            }
-        });
-    })
+        await p_db.execute(sql_query, [table_id]);
+
+        await p_db.commit();
+
+        return res.status(200).json({
+            msg:"success"
+        })
+    }
+    catch(err){
+        await p_db.rollback();
+        req.session.to_error_page = {
+            error:JSON.stringify(err)
+        }
+        return res.status(500).redirect("/static/error");
+    }
 }
 
 async function set_date_to_show_orders(req,res){
