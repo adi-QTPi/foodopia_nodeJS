@@ -62,6 +62,20 @@
 </nav>
 
 <body>
+    <div class="col-12 d-flex justify-content-center p-2">
+        <% if (to_menu_page && to_menu_page.error) { %>
+            <div class="alert alert-danger alert-dismissible fade show col-10 col-lg-6" role="alert">
+                <strong>Error!</strong> <%= to_menu_page.error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <% } %>
+        <% if (to_menu_page && to_menu_page.message) { %>
+            <div class="alert alert-success alert-dismissible fade show col-10 col-lg-6" role="alert">
+                <%= to_menu_page.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <% } %>
+    </div>
     <h1 class="text-center bg-glass sticky-top z-5 py-2">Menu Page</h1>
 
     <% if (to_menu_page.user.role === "admin") { %>

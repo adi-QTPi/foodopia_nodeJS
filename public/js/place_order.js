@@ -8,36 +8,6 @@ const go_to_cart_space_text = document.getElementsByClassName("go-to-cart-space-
 
 console.log('Menu:', to_menu_page);
 
-// for (let element of document.getElementsByClassName("add-to-cart")){
-//     let id = Number(element.id);
-//     element.addEventListener("click", ()=>{
-//         if(item_in_cart.find((item)=>item.item_id === id)){
-//             const item_index = item_in_cart.findIndex(item=> item.item_id === id);
-//             element.innerText = "add to cart";
-//             element.classList.remove("btn-dark");
-//             element.classList.add("btn-danger");
-//             item_in_cart.splice(item_index, 1);
-//         }
-//         else{
-//             console.log("its not in cart");
-//             let new_item_for_cart = {
-//                 item_id:id,
-//                 item_name:(to_menu_page.result.find((element)=>element.item_id ===id)).item_name,
-//                 price:(to_menu_page.result.find((element)=>element.item_id === id)).price,
-//                 quantity:1,
-//                 instruction:null
-//             }
-//             element.innerText = "Remove";
-//             element.classList.remove("btn-danger");
-//             element.classList.add("btn-dark")
-//             item_in_cart.push(new_item_for_cart);
-//         }
-
-//         toggle_to_cart_button_visibility();
-//         update_text_in_element(go_to_cart_space_text, `You have <span class="caveat-cursive fs-1"> ${item_in_cart.length} </span> item(s) in your cart !`);
-//     });
-// }
-
 document.addEventListener("click", function(event){
     if(event.target.classList.contains("add-to-cart")){
         let id = Number(event.target.id);
@@ -116,12 +86,10 @@ async function toggle_to_cart_button_visibility(){
     if(!item_in_cart.length){
 
         toggle_to_cart_space_visibility("none");
-        // go_to_cart_space.style.display = "none";
     }
     else{
 
         toggle_to_cart_space_visibility("block");
-        // to_cart_button.style.display = "block";
     }
 }
 

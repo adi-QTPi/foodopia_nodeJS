@@ -29,8 +29,6 @@ async function handle_render_signup_page(req,res){
 }
 
 async function handle_render_menu_page(req,res){
-    // let sql_query = `SELECT i.item_id, i.item_name, i.cook_time_min, i.price, i.display_pic, i.cat_id, c.cat_name, i.subcat_id, cd.cat_name FROM item i, category c, category cd WHERE i.cat_id = c.cat_id AND i.subcat_id = cd.cat_id;`
-
     let sql_query = "SELECT i.item_id, i.item_name, i.cook_time_min, i.price, i.display_pic, i.cat_id, c.cat_name AS cat_name, i.subcat_id, cd.cat_name AS subcat_name FROM item i JOIN category c ON i.cat_id = c.cat_id LEFT JOIN category cd ON i.subcat_id = cd.cat_id ORDER BY i.item_id;"
 
     db.query(sql_query, (err, result, fields)=>{
@@ -38,14 +36,22 @@ async function handle_render_menu_page(req,res){
         sql_query = `SELECT * FROM category ORDER BY cat_id;`;
         db.query(sql_query, (err, result2, fields)=>{
             if(err)return res.status(500).json(err);
-            const to_menu_page = {
+            let to_menu_page = {
                 user:req.x_user,
                 result,
                 result2
             }
+            if(req.session.to_menu_page){
+                if(req.session.to_menu_page.error){
+                    to_menu_page.error = req.session.to_menu_page.error;
+                }
+                else if(req.session.to_menu_page.message){
+                    to_menu_page.message = req.session.to_menu_page.message;
+                }
+            }
+            req.session.to_menu_page = null;
             console.log(to_menu_page);
             return res.status(200).render("menu", {to_menu_page});
-            // return res.status(200).json(result);
         })
     })
 }
@@ -58,7 +64,6 @@ async function handle_render_cart_page(req,res){
 }
 
 async function handle_render_orders_page(req, res){
-    //user wise order displau
     const curr_user = req.x_user;
     const user_id = curr_user.user_id;
 
@@ -89,25 +94,12 @@ async function handle_render_orders_page(req, res){
 
     db.query(sql_query, [user_id, date_in_query],(err, result, fields)=>{
         if(err) return res.status(500).json(err);
-        // let to_orders_page = {
-        //     x_user : curr_user,
-        //     order_details : result,
-        //     // page_date : new Date().toLocaleDateString('en-CA'),
-        // }
-
-        // if(req.session.to_orders_page){
-        //     to_orders_page = {
-        //         ...req.session.to_orders_page,
-        //         ...to_orders_page,
-        //     }
-        // }
 
         let to_orders_page = {
             ...req.session.to_orders_page,
             x_user: curr_user,
             order_details:result,
         }
-        // req.session.to_orders_page.page_date = new Date().toLocaleDateString('en-CA');
         
         res.status(200).render("orders", {to_orders_page});
     })

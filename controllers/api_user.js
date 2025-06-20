@@ -44,9 +44,6 @@ async function admin_handle_post_create_new_user(req,res){
         if(err){
             return res.status(500).send(err);
         }
-        // req.session.to_login_page = {
-        //     message:"New User created ! login to continue"
-        // }
         return res.redirect("/static/profile");
     })
 }

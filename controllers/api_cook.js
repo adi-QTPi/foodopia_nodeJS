@@ -1,8 +1,6 @@
 const {db} = require("../models/foodopiaDB");
 
 async function handle_post_mark_item_complete(req, res){
-    // console.log(req.x_user);
-    // console.log(req.body);
     const order_id = Number(req.body.order_id);
     const item_id = Number(req.body.item_id);
     const is_complete = req.body.is_complete;

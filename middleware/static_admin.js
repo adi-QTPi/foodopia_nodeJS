@@ -1,22 +1,5 @@
 const {db} = require("../models/foodopiaDB");
 
-// async function fetch_all_possible_dates(req, res, next){
-//     let sql_query = "SELECT DISTINCT DATE(order_at) as order_at FROM `order` ORDER BY DATE(order_at) DESC;";
-
-//     db.query(sql_query, (err, result, fields)=>{
-//         if(err)return res.status(500).json(err);
-//         console.log("possible dates are");
-//         console.log("==============");
-//         console.log(result);
-//         req.session.to_admin_page = {
-//             ...req.session.to_admin_page,
-//             all_possible_dates:result,
-//         }
-//         console.log("==============");
-//         next();
-//     })
-// }
-
 async function fetch_all_order_data (req, res, next){
     let date_in_query = ""; 
     let sql_query = "";
@@ -44,5 +27,4 @@ async function fetch_all_order_data (req, res, next){
 
 module.exports = {
     fetch_all_order_data,
-    // fetch_all_possible_dates,
 }
