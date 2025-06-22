@@ -155,7 +155,7 @@ async function render_filtered_menu(filtered_menu){
         let new_el = document.createElement("div");
         new_el.classList.add("card" ,"col-10", "col-lg-5" ,"d-flex" ,"flex-column");
 
-        let img_path = "/images/sample_food.webp";
+        let img_path = "/images/sample_food.png";
         if(items.display_pic !== null){
             img_path = "/"+items.display_pic;
         }
