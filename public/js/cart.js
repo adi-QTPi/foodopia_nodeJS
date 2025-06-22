@@ -1,5 +1,3 @@
-// const { render } = require("ejs");
-
 const to_menu_page = JSON.parse(sessionStorage.getItem("to_menu_page"));
 const item_in_cart = JSON.parse(sessionStorage.getItem("item_in_cart"));
 
@@ -75,8 +73,6 @@ async function render_cart(item_in_cart){
     }
 }
 
-//page rendering
-// show_user_details(to_menu_page);
 render_cart(item_in_cart);
 
 
