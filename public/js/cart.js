@@ -76,7 +76,7 @@ async function render_cart(item_in_cart){
 }
 
 //page rendering
-show_user_details(to_menu_page);
+// show_user_details(to_menu_page);
 render_cart(item_in_cart);
 
 
