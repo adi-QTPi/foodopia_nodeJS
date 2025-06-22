@@ -153,9 +153,21 @@ async function render_filtered_menu(filtered_menu){
 
     for( let items of reverse_filtered_menu){
         let new_el = document.createElement("div");
-        new_el.classList.add("card" ,"col-10", "col-lg-5" ,"d-flex" ,"flex-row");
+        new_el.classList.add("card" ,"col-10", "col-lg-5" ,"d-flex" ,"flex-column");
+
+        let img_path = "/images/sample_food.webp";
+        if(items.display_pic !== null){
+            img_path = "/"+items.display_pic;
+        }
+
         if(to_menu_page.user.role === "admin" || to_menu_page.user.role === "cook"){
             new_el.innerHTML = `
+            <div class="ratio ratio-21x9 menu-card-image-container">
+                <img class="card-img-top menu-card-image" src=
+                "${img_path}"
+                alt="sample-pic">
+            </div>
+            <div class="d-flex flex-row">
                 <div class="card-body flex-grow">
                     <div class="card-title fs-2">
                         ${items.item_name}
@@ -181,10 +193,17 @@ async function render_filtered_menu(filtered_menu){
                         <button type="submit" class="btn btn-danger">Delete Item</button>
                     </form>
                 </div>
+            </div>
             `;
         }
         else{
             new_el.innerHTML = `
+            <div class="ratio ratio-21x9 menu-card-image-container">
+                <img class="card-img-top menu-card-image" src=
+                "${img_path}"
+                alt="sample-pic">
+            </div>
+            <div class="d-flex flex-row">
                 <div class="card-body flex-grow">
                     <div class="card-title fs-2">
                         ${items.item_name}
@@ -207,6 +226,7 @@ async function render_filtered_menu(filtered_menu){
                     <div class="fs-3">₹ ${items.price}</div>
                     <button class="add-to-cart btn btn-danger" id="${items.item_id}">Add to Cart</button>
                 </div>
+            </div>
             `;
         }
         menu_space.appendChild(new_el);

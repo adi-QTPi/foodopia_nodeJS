@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
+const multer = require("multer");
 
 const { 
     check_for_entries_in_array 
@@ -13,8 +15,17 @@ const {
 const {
     handle_get_item,
     handle_post_item,
-    handle_post_delete_item
+    handle_post_delete_item,
 } = require("../controllers/api_item");
+
+const storage = multer.diskStorage({
+    destination: "public/uploads",
+    filename: function (req, file, cb){
+        cb(null, Date.now()+file.originalname);
+    }
+})
+
+const upload = multer({storage : storage});
 
 router.use(
     auth_check_if_logged_in, 
@@ -25,7 +36,12 @@ router
     .route("/")
     .get(handle_get_item)
     .post(
+        upload.fields([{name:"display_pic", maxCount:1}]),
         check_for_entries_in_array(["item_name", "price", "cat_id"]),
+        // (req, res)=>{
+        //     console.log(req.files.display_pic[0].path);
+        //     res.redirect("/static/menu");
+        // }
         handle_post_item
     )
 

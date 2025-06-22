@@ -10,7 +10,8 @@ async function handle_get_item(req, res){
 }
 
 async function handle_post_item(req, res){
-    let {item_name, cat_id, subcat_id, price, cook_time_min, display_pic } = req.body;
+    let {item_name, cat_id, subcat_id, price, cook_time_min } = req.body;
+    const display_pic = req.files?.display_pic?.[0]?.path.replace('public/', '') || null;
 
     if(cat_id === subcat_id){
         subcat_id=null;
@@ -52,5 +53,5 @@ async function handle_post_delete_item(req,res){
 module.exports = {
     handle_get_item,
     handle_post_item,
-    handle_post_delete_item
+    handle_post_delete_item,
 }

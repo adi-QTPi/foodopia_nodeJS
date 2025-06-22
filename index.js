@@ -7,6 +7,8 @@ const session = require("express-session");
 require("dotenv").config();
 const PORT = process.env.SERVER_PORT;
 const {SESSION_SECRET_KEY} = process.env;
+const multer = require("multer");
+const upload = multer({dest: "./public/uploads/"});
 
 app.use(express.urlencoded());
 app.use(express.json());
