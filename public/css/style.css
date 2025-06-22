@@ -171,9 +171,10 @@
 .placeholder-blank-space{
     min-height: 30vh;
 }
-.taken-by-you{
 
+.menu-card-image{
+    object-fit:cover;
 }
-.completed-today{
-    
+.menu-card-image-containe{
+
 }
