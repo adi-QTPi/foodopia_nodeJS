@@ -9,7 +9,12 @@ async function handle_post_mark_item_complete(req, res){
     let sql_query = "UPDATE item_order SET is_complete = ?, cook_id = ? WHERE order_id = ? AND item_id = ?;";
 
     db.query(sql_query,[is_complete, cook_id, order_id, item_id], (err, result, fields)=>{
-        if(err)return res.status(500).json(err);
+        if(err){
+            req.session.to_error_page = {
+                error : JSON.stringify(err),
+            }
+            return res.redirect("/static/error");
+        }
         res.status(200).redirect("/static/cook");
     })
 }

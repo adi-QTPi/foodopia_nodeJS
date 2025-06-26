@@ -4,7 +4,12 @@ async function handle_get_item(req, res){
     let sql_query = `SELECT * FROM item;`;
 
     db.query(sql_query, (err, result, fields)=>{
-        if(err)return res.status(500).json(err);
+        if(err){
+            req.session.to_error_page = {
+                error : JSON.stringify(err),
+            }
+            return res.redirect("/static/error");
+        }
         return res.status(200).json(result);
     })
 }
