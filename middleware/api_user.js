@@ -64,9 +64,29 @@ async function check_password_strength(req, res, next){
     next();
 }
 
+async function check_if_unique_username(req, res, next){
+    const { user_name, name, role, password } = req.body;
+    
+    let sql_query = `SELECT user_id FROM user WHERE user_name = ?`;
+
+    db.query(sql_query, [user_name], (err, result, fields) =>{
+        const result_obj = result[0];
+        if(!result_obj){
+            next();
+        }
+        else{
+            req.session.to_signup_page = {
+                error:"the username is taken... choose another username."
+            };
+            res.status(400).redirect("../../static/signup");
+        }
+    })
+}
+
 module.exports = {
     check_password_confirmation,
     check_new_user_detail_entry_signup,
     hash_password,
     check_password_strength,
+    check_if_unique_username
 }

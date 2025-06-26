@@ -38,10 +38,6 @@ router
     .post(
         upload.fields([{name:"display_pic", maxCount:1}]),
         check_for_entries_in_array(["item_name", "price", "cat_id"]),
-        // (req, res)=>{
-        //     console.log(req.files.display_pic[0].path);
-        //     res.redirect("/static/menu");
-        // }
         handle_post_item
     )
 

@@ -11,6 +11,7 @@ async function handle_post_orders_by_date(req, res){
     res.status(200).redirect("/static/admin");
 }
 
+
 module.exports = {
-    handle_post_orders_by_date
+    handle_post_orders_by_date,
 }

@@ -8,6 +8,7 @@ const {
 const { 
     hash_password,
     check_password_confirmation,
+    check_if_unique_username
 } = require("../middleware/api_user");
 
 const {
@@ -15,7 +16,7 @@ const {
 } = require("../middleware/general")
 
 const { 
-    admin_handle_post_create_new_user
+    admin_handle_post_create_new_user,
 } = require("../controllers/api_user");
 
 router  
@@ -25,8 +26,8 @@ router
 router
     .route("/create_new")
     .post(
-
         check_for_entries_in_array(["user_name", "name", "password", "d_password", "role"]),
+        check_if_unique_username,
         check_password_confirmation,
         hash_password,
         admin_handle_post_create_new_user
