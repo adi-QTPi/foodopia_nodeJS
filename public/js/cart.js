@@ -6,7 +6,7 @@ async function render_cart(item_in_cart){
     cart_space.innerHTML = ``;
     for (let items of item_in_cart){
         let new_el = document.createElement("div");
-        new_el.classList.add("card", "d-flex", "flex-row");
+        new_el.classList.add("card", "d-flex", "flex-row", "col-12", "col-lg-10", "mx-auto");
         let sub_total = items.quantity * items.price;
 
         new_el.innerHTML = `
@@ -14,12 +14,12 @@ async function render_cart(item_in_cart){
                 <div class="card-title fs-2">
                     ${items.item_name}
                 </div>
-                <div class="card-subtitle text-muted form-floating">
+                <div class="card-subtitle text-muted form-floating col-12">
                     <input type="text" class="form-control item_instruction_input" data-item-id="${items.item_id}" placeholder="abc" id="instruction">
                     <label for="instruction">Instruction for the Chef</label>
                 </div>
             </div>
-            <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
+            <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center col-4">
                 <div class="fs-3 sub_total">₹${sub_total}</div>
                 <div>
                     <button type="button" class="btn btn-dark qty-btn minus-btn" data-item-id="${items.item_id}">-</button>
@@ -28,7 +28,7 @@ async function render_cart(item_in_cart){
                 </div>
             </div>
             <div class="flex-shrink-1 d-flex align-items-center justify-content-center mx-1">
-                <button type="button" class="delete-btn btn btn-danger">Delete</button>
+                <button type="button" class="delete-btn btn btn-danger">Remove</button>
             </div>
         `;
         cart_space.appendChild(new_el);
