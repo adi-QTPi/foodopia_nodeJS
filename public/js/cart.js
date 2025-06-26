@@ -21,13 +21,13 @@ async function render_cart(item_in_cart){
             </div>
             <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center col-4">
                 <div class="fs-3 sub_total">₹${sub_total}</div>
-                <div>
-                    <button type="button" class="btn btn-dark qty-btn minus-btn" data-item-id="${items.item_id}">-</button>
+                <div class = "d-flex flex-row align-items-center gap-2">
+                    <button type="button" class="btn btn-dark qty-btn minus-btn btn-sm" data-item-id="${items.item_id}">-</button>
                     <span class="qty-display fs-2">${items.quantity}</span>
-                    <button type="button" class="btn btn-dark qty-btn plus-btn" data-item-id="${items.item_id}">+</button>
+                    <button type="button" class="btn btn-dark qty-btn plus-btn btn-sm" data-item-id="${items.item_id}">+</button>
                 </div>
             </div>
-            <div class="flex-shrink-1 d-flex align-items-center justify-content-center mx-1">
+            <div class="flex-shrink-1 d-flex align-items-center justify-content-center mx-1 me-3">
                 <button type="button" class="delete-btn btn btn-danger">Remove</button>
             </div>
         `;
