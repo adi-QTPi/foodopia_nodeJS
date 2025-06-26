@@ -69,10 +69,6 @@
         "><%= to_order_by_id_page.order_data[0].order_status %></span>
     </h1>
 
-    <!-- <% if (to_order_by_id_page.x_user.role === "admin") { %>
-        <div class="text-center truculenta-normal">ordered By -> <%= to_order_by_id_page.order_data[0].customer_name %></div>
-    <% } %> -->
-
     <div class="container">
         <div class="text-center truculenta-normal">On <span class="fs-4 text-primary "><%= to_order_by_id_page.order_data[0].order_at.toDateString()%></span> @ <span class="fs-4 text-primary"><%= to_order_by_id_page.order_data[0].order_at.toLocaleTimeString()%></span> 
             <% if (to_order_by_id_page.x_user.role === "admin") { %>

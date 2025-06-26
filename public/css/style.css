@@ -33,23 +33,19 @@
 
 .bg-queen-pink{
     background-color: #cb3466; 
-    /* contrast color = #34CB99 */
 }
 .bg-light-pink{
     background-color: #f7dfe6; 
-    /* contrast color = #34CB99 */
 }
 
 .border-queen-pink{
     border-style: solid;
     border-color: #cb3466; 
     border-width: 0.1rem;
-    /* contrast color = #34CB99 */
 }
 
 .rounded-queen-pink-border{
     border: solid 0.2rem #cb3466;
-    /* border-width: 2rem; */
 }
 
 .border-filter{
@@ -64,15 +60,12 @@
 }
 
 .btn-filter{
-    /* color: #34CB99; */
     color: #cb3466;
     background: none;
     border: none;
 }
 
 .btn-filter-clicked{
-    /* color: #34CB99; */
-    /* color: #cb3466; */
     color: black;
     background: #34CB99;
     border: none;
@@ -109,11 +102,9 @@
 .home-page-logo{
     font-size: 10rem;
     backdrop-filter: blur(0.2rem);
-    /* color: #06516a; */
     color: #0991be;
     text-shadow:0.25rem 0.25rem 0rem #cb3466, -0.25rem -0.25rem 0rem #06516a;
     border-radius: 3rem;
-    /* background: rgba(220,220,240,0.5) */
 }
 
 .user-profile{
@@ -174,7 +165,4 @@
 
 .menu-card-image{
     object-fit:cover;
-}
-.menu-card-image-containe{
-
 }

@@ -38,11 +38,8 @@ document.addEventListener("click", function(event){
 
 toggle_to_cart_space_visibility("none");
 
-
-//filter logic 
-
 let selected_filters = []; let filtered_menu = [];
-const filter_buttons = document.getElementsByClassName("filter-buttons")[0].children; //array hai!
+const filter_buttons = document.getElementsByClassName("filter-buttons")[0].children;
 
 for (let filter of filter_buttons){
     filter.addEventListener("click", ()=>{
