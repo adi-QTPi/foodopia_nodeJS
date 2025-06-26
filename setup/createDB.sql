@@ -1,17 +1,14 @@
--- Create database
 DROP DATABASE IF EXISTS foodopia;
 CREATE DATABASE foodopia;
--- Use the database
+
 USE foodopia;
 
--- Category table (referenced by item table)
 CREATE TABLE category (
     cat_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     cat_name VARCHAR(255) NOT NULL,
     cat_description VARCHAR(500)
 );
 
--- User table with UUID user_id
 CREATE TABLE user (
     user_id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     user_name VARCHAR(255) NOT NULL,
@@ -21,13 +18,11 @@ CREATE TABLE user (
     role ENUM('customer', 'cook', 'admin') NOT NULL
 );
 
--- Table table
 CREATE TABLE `table` (
     table_id BIGINT PRIMARY KEY,
     is_empty BOOLEAN
 );
 
--- Item table
 CREATE TABLE item (
     item_id BIGINT AUTO_INCREMENT PRIMARY KEY ,
     item_name VARCHAR(255) NOT NULL,
@@ -41,7 +36,6 @@ CREATE TABLE item (
     FOREIGN KEY (subcat_id) REFERENCES category(cat_id)
 );
 
--- Order table
 CREATE TABLE `order` (
     order_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_at TIMESTAMP NOT NULL,
@@ -53,7 +47,6 @@ CREATE TABLE `order` (
     FOREIGN KEY (table_no) REFERENCES `table`(table_id)
 );
 
--- Item_order table (junction table)
 CREATE TABLE item_order (
     order_id BIGINT,
     item_id BIGINT,
@@ -67,7 +60,6 @@ CREATE TABLE item_order (
     FOREIGN KEY (cook_id) REFERENCES user(user_id)
 );
 
--- Paid_orders table (derived table for paid orders)
 CREATE TABLE paid_orders (
     order_id BIGINT PRIMARY KEY,
     customer_review VARCHAR(1000),
@@ -75,7 +67,6 @@ CREATE TABLE paid_orders (
     FOREIGN KEY (order_id) REFERENCES `order`(order_id)
 );
 
--- Create indexes for better performance
 CREATE INDEX idx_order_customer_id ON `order`(customer_id);
 CREATE INDEX idx_order_status ON `order`(status);
 CREATE INDEX idx_item_cat_id ON item(cat_id);
