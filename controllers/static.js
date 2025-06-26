@@ -27,10 +27,20 @@ async function handle_render_menu_page(req,res){
     let sql_query = "SELECT i.item_id, i.item_name, i.cook_time_min, i.price, i.display_pic, i.cat_id, c.cat_name AS cat_name, i.subcat_id, cd.cat_name AS subcat_name FROM item i JOIN category c ON i.cat_id = c.cat_id LEFT JOIN category cd ON i.subcat_id = cd.cat_id WHERE i.is_available = 1 ORDER BY RAND();"
 
     db.query(sql_query, (err, result, fields)=>{
-        if(err)return res.status(500).json(err);
+        if(err){
+            req.session.to_error_page = {
+                error: err
+            }
+            return res.redirect("/static/error");
+        }
         sql_query = `SELECT * FROM category ORDER BY cat_id;`;
         db.query(sql_query, (err, result2, fields)=>{
-            if(err)return res.status(500).json(err);
+            if(err){
+                req.session.to_error_page = {
+                    error : JSON.stringify(err),
+                }
+                return res.redirect("/static/error");
+            }
             let to_menu_page = {
                 user:req.x_user,
                 result,
@@ -87,7 +97,12 @@ async function handle_render_orders_page(req, res){
     }
 
     db.query(sql_query, [user_id, date_in_query],(err, result, fields)=>{
-        if(err) return res.status(500).json(err);
+        if(err){
+            req.session.to_error_page = {
+                error: err
+            }
+            return res.redirect("/static/error");
+        }
 
         let to_orders_page = {
             ...req.session.to_orders_page,
@@ -95,7 +110,7 @@ async function handle_render_orders_page(req, res){
             order_details:result,
         }
         
-        res.status(200).render("orders", {to_orders_page});
+        return res.status(200).render("orders", {to_orders_page});
     })
 }
 
@@ -104,7 +119,7 @@ async function handle_render_order_by_id(req, res){
         ...req.session.to_order_by_id_page,
         x_user:req.x_user,
     }
-    res.status(200).render("order_by_id", { to_order_by_id_page });
+    return res.status(200).render("order_by_id", { to_order_by_id_page });
 }   
 
 async function handle_render_error_page(req, res){
@@ -115,7 +130,7 @@ async function handle_render_error_page(req, res){
             ...req.session.to_error_page,
         }
     }
-    res.render("error", {to_error_page});
+    return res.render("error", {to_error_page});
 }
 
 module.exports = {
