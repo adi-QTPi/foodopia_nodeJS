@@ -1,10 +1,6 @@
 const to_menu_page = JSON.parse(sessionStorage.getItem("to_menu_page"));
 const item_in_cart = JSON.parse(sessionStorage.getItem("item_in_cart"));
 
-
-console.log(to_menu_page);
-console.log(item_in_cart);
-
 async function render_cart(item_in_cart){
     const cart_space = document.getElementsByClassName("cart_space")[0];
     cart_space.innerHTML = ``;
@@ -96,9 +92,6 @@ cart_form.addEventListener("submit", (e)=>{
 
     sessionStorage.setItem("item_in_cart", JSON.stringify(item_in_cart));
 
-    console.log("form submit button pressed...");
-    console.log(item_in_cart);
-
     fetch("/api/orders", {
     method: "POST",
     body: JSON.stringify(item_in_cart),
@@ -108,8 +101,6 @@ cart_form.addEventListener("submit", (e)=>{
     })
     .then((response) => response.json())
     .then((data)=>{
-        console.log(data);
         window.location.href="/static/orders"
-    })
-    .catch((err)=>console.log("error:", err));
+    });
 })

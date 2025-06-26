@@ -77,5 +77,5 @@ module.exports ={
     handle_delete_user_by_id,
     handle_post_create_new_user,
     handle_post_user_logout,
-    admin_handle_post_create_new_user
+    admin_handle_post_create_new_user,
 }

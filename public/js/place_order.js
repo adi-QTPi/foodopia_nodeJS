@@ -6,8 +6,6 @@ const to_menu_page = JSON.parse(metaTag.getAttribute('content'));
 const go_to_cart_space = document.getElementsByClassName("go-to-cart-space")[0];
 const go_to_cart_space_text = document.getElementsByClassName("go-to-cart-space-text")[0];
 
-console.log('Menu:', to_menu_page);
-
 document.addEventListener("click", function(event){
     if(event.target.classList.contains("add-to-cart")){
         let id = Number(event.target.id);
@@ -19,7 +17,6 @@ document.addEventListener("click", function(event){
             item_in_cart.splice(item_index, 1);
         }
         else{
-            console.log("its not in cart");
             let new_item_for_cart = {
                 item_id:id,
                 item_name:(to_menu_page.result.find((el)=>el.item_id ===id)).item_name,
@@ -63,7 +60,6 @@ for (let filter of filter_buttons){
         create_filtered_menu(selected_filters);
         render_filtered_menu(filtered_menu);
         toggle_add_to_cart_button_label();
-        console.log(selected_filters);
     })
 }
 
@@ -76,7 +72,6 @@ clear_filter_button.addEventListener("click", ()=>{
         }
         selected_filters = [];
     }
-    console.log(selected_filters);
     create_filtered_menu(selected_filters);
     render_filtered_menu(filtered_menu);
     toggle_add_to_cart_button_label();
@@ -108,7 +103,6 @@ async function toggle_add_to_cart_button_label(){
             buttons.innerText = "Add to Cart"
         }
     }
-    console.log("due to toggle add to cart button label: item_in_Cart = ",item_in_cart);
 }
 
 async function toggle_to_cart_space_visibility(vis_value){
@@ -131,7 +125,6 @@ async function create_filtered_menu(selected_filters){
             }
         }
     }
-    console.log("filtered menu => ", filtered_menu);
 }
 
 const filtered_menu_space = document.getElementsByClassName("filtered-menu-space")[0];
