@@ -40,7 +40,7 @@ fs.appendFileSync(env_file, `\nMYSQL_PORT="${mysql_port}"`, "utf8" );
 
 fs.appendFileSync(env_file, `\nADMIN_NAME="${admin_name}"`, "utf8" );
 fs.appendFileSync(env_file, `\nADMIN_PASSWORD="${admin_password}"`, "utf8" );
-fs.appendFileSync(env_file, `\MSHELL="${mysql_add}"`, "utf8" );
+fs.appendFileSync(env_file, `\nSHELL="${mysql_add}"`, "utf8" );
 
 async function setup_chores(){
     try{
