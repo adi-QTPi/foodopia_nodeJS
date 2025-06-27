@@ -10,9 +10,9 @@ console.log("This is the Setup Script for this project.\n");
 
 const server_port = prompt("Enter app server-port (2000 to 40000) : ");
 const jwt_secret = prompt("Enter a secret key for JWT : ");
-const session_secret_key = prompt("The site uses sessions, enter a secret key for sessions : ");
+const session_secret_key = prompt("Enter a secret key for Sessions : ");
 
-console.log("\nSetup Database\n(press enter to use the default values)\n");
+console.log("\nSetup Database (press enter to use the default values)\n");
 
 const mysql_host = default_input("MySQL host (default localhost) : ", "localhost");
 
@@ -47,10 +47,12 @@ async function setup_chores(){
         const { stdout, stderr } = await p_exec("node setup/create_db.js");
         if (stdout) console.log(stdout);
 
-        const { stdout2 } = await p_exec("node setup/set_the_admin.js");
+        const { stdout2, stderr2 } = await p_exec("node setup/set_the_admin.js");
         if(stdout2) console.log(stdout2);
+        console.log("New admin with username `admin` is created.");
+        console.log("Create New Accounts with different roles using your admin privilege.");
 
-        console.log("We have a gift for you <3 ");
+        console.log("\nAlso...We have a gift for you <3 we offer you dummy data for the menu !");
         const to_add_dummy_data = default_input("enter `y` to accept [any other input means you reject this gift :(] : ");
         if(to_add_dummy_data === "y"){
             const { stdout, stderr } = await p_exec("node setup/add_dummy_db.js");
