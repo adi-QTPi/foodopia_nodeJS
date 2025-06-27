@@ -18,7 +18,7 @@ async function make_the_admin() {
       console.log(err);
     }
     console.log("New admin with username `admin` is created.");
-    console.log("Creaate New Accounts with different roles using your admin privilege.");
+    console.log("Create New Accounts with different roles using your admin privilege.");
   })
 }
 
