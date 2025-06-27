@@ -10,9 +10,16 @@ async function auth_check_if_logged_in(req,res,next){
         }
         return res.redirect("/static/login");
     }
-    const curr_user = jwt.verify(obtained_token, JWT_SECRET);
-    req.x_user = curr_user;
-    next();
+    try{
+        const curr_user = jwt.verify(obtained_token, JWT_SECRET);
+        req.x_user = curr_user;
+        next();
+    }catch(error){
+        req.session.to_login_page = {
+            "message":"Seems like your cookies are a bit off, Log in again!"
+        }
+        return res.redirect("/static/login");
+    }
 }
 
 const auth_restrict_to = (array_of_allowed_roles) =>{
@@ -33,8 +40,15 @@ const auth_restrict_to = (array_of_allowed_roles) =>{
 async function auth_just_check_if_logged_in(req, res,next){
     const obtained_token = req.cookies.token;
     if(obtained_token){
-        const curr_user = jwt.verify(obtained_token, JWT_SECRET);
-        req.x_user = curr_user;
+        try{
+            const curr_user = jwt.verify(obtained_token, JWT_SECRET);
+            req.x_user = curr_user;
+        }catch(error){
+            req.session.to_login_page = {
+                "message":"Seems like your cookies are a bit off, Log in again!"
+            }
+            return res.redirect("/static/login");
+        }        
     }
     next();
 }
