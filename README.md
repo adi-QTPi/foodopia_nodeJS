@@ -6,19 +6,15 @@
    npm i
    ```
 
-2. Create a `.env` file based on `.env.example`.
-
-3. Create the database on your device using the `createDB.sql` file.
-
-4. Set the admin user:
+2. Run the setup script and follow the instructions :
 
    ```bash
-   node setup/set_the_admin.js
+   node setup_script.js
    ```
 
-5. Et voilà! You are good to go.
+3. Et voilà! You are good to go.
 
-6. Start the application:
+4. Start the application:
 
    ```bash
    npm start
