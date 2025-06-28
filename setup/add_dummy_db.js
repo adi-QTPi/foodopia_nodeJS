@@ -13,5 +13,5 @@ exec(`${shell_command} < setup/add_dummyDB.sql`, (error, stdout , stderr)=>{
         console.log(error);
         return;
     }
-    console.log("Dummy Data added successfully !");
+    console.log("\nDummy Data added successfully !");
 });
