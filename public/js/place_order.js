@@ -150,7 +150,7 @@ async function render_filtered_menu(filtered_menu){
             img_path = "/"+items.display_pic;
         }
 
-        if(to_menu_page.user.role === "admin" || to_menu_page.user.role === "cook"){
+        if(to_menu_page.user.role === "admin"){
             new_el.innerHTML = `
             <div class="ratio ratio-21x9 menu-card-image-container">
                 <img class="card-img-top menu-card-image" src=
@@ -182,6 +182,38 @@ async function render_filtered_menu(filtered_menu){
                         <input type="hidden" name="item_id" value="${items.item_id}">
                         <button type="submit" class="btn btn-danger">Delete Item</button>
                     </form>
+                </div>
+            </div>
+            `;
+        }
+        else if (to_menu_page.user.role === "cook") {
+            new_el.innerHTML = `
+            <div class="ratio ratio-21x9 menu-card-image-container">
+                <img class="card-img-top menu-card-image" src=
+                "${img_path}"
+                alt="sample-pic">
+            </div>
+            <div class="d-flex flex-row">
+                <div class="card-body flex-grow">
+                    <div class="card-title fs-2">
+                        ${items.item_name}
+                    </div>
+                    <div class="card-subtitle text-muted">
+                        wait time : <span class="text-queen-pink">
+                            ${items.cook_time_min}
+                        </span> Minutes
+                    </div>
+                    <div class="d-flex flex-row col-10">
+                        <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                            ${items.cat_name}
+                        </div>
+                        <div class="flex-fill border p-2 m-1 text-center truculenta-normal fs-5">
+                            ${items.subcat_name}
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center col-2">
+                    <div class="fs-3 mx-auto">₹ ${items.price}</div>
                 </div>
             </div>
             `;

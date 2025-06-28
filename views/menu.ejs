@@ -147,7 +147,7 @@
 
     <div class="d-flex col-11 col-lg-8 mx-auto border-queen-pink rounded-4">
         <div class="flex-shrink-1 p-2 text-queen-pink fs-4 border-filter mx-1 caveat-cursive">Filters</div>
-        <div class=" d-flex  overflow-auto hide-scrollbar filter-buttons">
+        <div class=" d-flex  overflow-auto filter-buttons">
             <% for(let category of to_menu_page.result2) { %>
                 <button class="btn-filter rounded-2 m-2 col-auto" data-btn="<%=category.cat_id%>"><%=category.cat_name%></button>
             <% } %>
@@ -193,8 +193,8 @@
                                 <% } %>
                             </div>
                         </div>
-                        <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center">
-                            <div class="fs-3">₹<%= items.price %></div>
+                        <div class="flex-shrink-1 d-flex flex-column me-2 align-items-center justify-content-center col-2">
+                            <div class="fs-3 mx-auto">₹<%= items.price %></div>
                             <% if (to_menu_page.user.role === "customer") { %>
                                 <button class="add-to-cart btn btn-danger" id="<%=items.item_id%>">Add to Cart</button>
                             <% } %>
