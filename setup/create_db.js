@@ -14,5 +14,5 @@ exec(`${shell_command} < setup/createDB.sql`,{ shell : shell}, (error, stdout , 
         console.log(error);
         return;
     }
-    console.log("Database named `foodopia` created Successfully !");
+    console.log("\nDatabase named `foodopia` created Successfully !");
 });
