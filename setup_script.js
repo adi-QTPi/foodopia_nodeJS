@@ -24,7 +24,7 @@ const admin_name = default_input("Admin name (default admin) : ", "admin");
 const admin_password = prompt("Password for the admin's account : ");
 
 console.log("\nAlmost ready...");
-const mysql_add = prompt("Bro go somewhere else and please run the command `which mysql` and paste that here : ");
+// const mysql_add = prompt("Bro go somewhere else and please run the command `which mysql` and paste that here : ");
 
 const env_file = ".env";
 
@@ -40,7 +40,7 @@ fs.appendFileSync(env_file, `\nMYSQL_PORT="${mysql_port}"`, "utf8" );
 
 fs.appendFileSync(env_file, `\nADMIN_NAME="${admin_name}"`, "utf8" );
 fs.appendFileSync(env_file, `\nADMIN_PASSWORD="${admin_password}"`, "utf8" );
-fs.appendFileSync(env_file, `\nSHELL="${mysql_add}"`, "utf8" );
+// fs.appendFileSync(env_file, `\nSHELL="${mysql_add}"`, "utf8" );
 
 async function setup_chores(){
     try{
