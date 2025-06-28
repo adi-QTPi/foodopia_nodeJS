@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const shell = process.env.SHELL;
 
-exec("echo $PATH",{ shell : shell}, (error, stdout , stderr)=>{
+exec("source ~/.zshrc | mysql -u root -p127west26",{ shell : shell}, (error, stdout , stderr)=>{
     if(error){
         console.log(error);
         return;
