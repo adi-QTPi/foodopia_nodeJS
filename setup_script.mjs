@@ -73,10 +73,12 @@ do{
     pass_condition = check.type(mysql_port, "integer");
 }while(!(pass_condition)); repeat = false;
 
+console.log("\nDefault admin username = `admin`");
+
 let admin_name;
 do{
     if(repeat)console.log("\nInvalid Input, try again...");
-    admin_name = default_input("Admin name (default admin) : ", "admin");
+    admin_name = default_input("Set Admin name (default admin) : ", "admin");
     repeat = true;
     pass_condition = true;
 }while(!(pass_condition)); repeat = false;
@@ -84,7 +86,7 @@ do{
 let admin_password;
 do{
     if(repeat)console.log("\nInvalid Input, try again...");
-    admin_password = prompt("Password for the admin's account (minimum 10 characters) : ");    
+    admin_password = prompt("Set Password for admin (minimum 10 characters) : ");    
     repeat = true;
     pass_condition = check.not_null(admin_password) && check.length(admin_password, 10);
 }while(!(pass_condition)); repeat = false;
