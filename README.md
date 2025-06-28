@@ -9,7 +9,7 @@
 2. Run the setup script and follow the instructions :
 
    ```bash
-   node setup_script.js
+   node setup_script.mjs
    ```
 
 3. Et voilà! You are good to go.
