@@ -4,7 +4,7 @@ services:
       context: ../
       dockerfile: ./dev/Dockerfile.mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=127west26
+      - MYSQL_ROOT_PASSWORD=root_pwd
       - MYSQL_DATABASE=foodopia
     ports:
       - "3308:3306"
@@ -27,7 +27,7 @@ services:
       - SESSION_SECRET_KEY=s;ldkj;safjadls;fja;sdj;flfjsdjf;dsajfd
       - MYSQL_HOST=mysql
       - MYSQL_USERNAME=root
-      - MYSQL_PASSWORD=127west26
+      - MYSQL_PASSWORD=root_pwd
       - MYSQL_PORT=3306
       - ADMIN_NAME=haldi
       - ADMIN_PASSWORD=1234567890
