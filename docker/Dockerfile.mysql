@@ -1,5 +1,0 @@
-FROM mysql:oraclelinux9
-
-COPY ./one_setup.sql /docker-entrypoint-initdb.d/
-
-EXPOSE 3306
