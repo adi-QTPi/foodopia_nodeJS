@@ -1,8 +1,6 @@
 services:
   mysql:
-    build: 
-      context: ../
-      dockerfile: ./dev/Dockerfile.mysql
+    image: adiqtpi/foodopia:db
     environment:
       - MYSQL_ROOT_PASSWORD=root_pwd
       - MYSQL_DATABASE=foodopia
@@ -18,9 +16,9 @@ services:
     networks:
       - hungry-net
   node:
-    build: 
-      context: ../../
-      dockerfile: ./docker/dev/Dockerfile.node
+    image: adiqtpi/foodopia:app
+    volumes:
+      - ../../:/app
     environment:
       - SERVER_PORT=9080
       - JWT_SECRET=sfdkjasl;fjdsfjlsdfj;adskfjs;lfj;ldsafj;s
